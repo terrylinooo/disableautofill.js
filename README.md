@@ -41,7 +41,7 @@ callback | - | To validate form fields or something you can do.
 
 
 ### Example
-```
+```javascript
 $('#login-form').disableAutoFill({
     'passwordFiled': '.password',
     'callback': function() {
@@ -68,3 +68,7 @@ function checkForm() {
 ### License
 
 MIT
+
+### Authors
+
+* <a href="https://en.dictpedia.org">Terry Lin</a> (terrylinooo)
