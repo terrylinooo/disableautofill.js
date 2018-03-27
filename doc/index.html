@@ -5,48 +5,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>jQuery.disableAutoFill plugin - User Guide</title>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/login.css" rel="stylesheet" />
-    <script src="assets/js/jquery.disableAutoFill.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../src/jquery.disableAutoFill.js"></script>
     
 </head>
 <body>
-    <div class="flexbox">
-        <div class="container mb-4">
-            <div class="row justify-content-center">
-                <div class="col-11 mb-3">
-                    <div class="d-inline-block align-middle">
-                    <img src="/assets/img/logo.png" class="img-fluid"></div>
-                    <div class="d-inline-block align-text-top">Login Form</div>
-                </div>
-                <div class="col-9 col-lg-4 form-bg35">
-    
-                    <form method="post" id="login-form" action="/home/userLoginForm" autocomplete="off" >
-                        <div class="form-group mb-4">
-                            <input type="text" name="username" class="form-control icon_user" placeholder="User ID">
-                        </div>
-                        <div class="form-group mb-5">
-                            <input type="text" name="password" class="form-control icon_password" placeholder="Password">
-                        </div>
-                        <button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
-                    </form>
-                </div>
+    <a href="https://github.com/terrylinooo/jquery.disableAutoFill">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png" alt="Fork me on GitHub">
+    </a>
+    <div class="header">
+        <h1 class="page-title">jQuery Disable Auto Fill Plugin</h1>
+        <p>The easiest solution for disabling Google Chrome auto-fill, auto-complete functions.</p>
+        <hr />
+        <p>
+            <iframe src="https://ghbtns.com/github-btn.html?user=terrylinooo&repo=jquery.disableAutoFill&type=star&count=true" frameborder="0" scrolling="0" width="120px" height="20px"></iframe>
+            <iframe src="https://ghbtns.com/github-btn.html?user=terrylinooo&type=follow&count=true" frameborder="0" scrolling="0" width="190px" height="20px"></iframe>
+        </p>
+    </div>
+    <div class = "container">
+        <div class="wrapper">
+            <form action="" id="login-form" method="post" class="form-signin">       
+                <h3 class="form-signin-heading">Login</h3>
+                <hr class="colorgraph"><br>
+                <div id="origin-source">
+                    <input type="text" class="form-control" name="username" placeholder="Username" required="" autofocus="" />
+                    <input type="password" class="form-control password" name="password" placeholder="Password" required=""/>     		  
+                    <button class="btn btn-lg btn-primary btn-block" name="submit" value="Login" type="Submit">Login</button>
+                </div>  			
+            </form>
+            <div class="form-signin demo-source">
+                <button class="btn btn-primary" onclick="enablePlugin()">Enable plugin</button>
+                 - <a href="https://github.com/terrylinooo/jquery.disableAutoFill">Read document</a>
+                <textarea id="source-changes" style="width: 100%; height: 300px"></textarea>
             </div>
         </div>
     </div>
-
-    <div class="wrapper">
-        <form class="form-signin">       
-          <h2 class="form-signin-heading">Please login</h2>
-          <input type="text" class="form-control" name="username" placeholder="User ID" />
-          <input type="password" class="form-control" name="password" placeholder="Password" />      
-
-          <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>   
-        </form>
+    <div class="footer">
+        Powered by Terry Lin. The <a href="https://en.dictpedia.org">Dictpedia</a> founder & developer. 
     </div>
-
 
     <script>
 
@@ -66,11 +65,20 @@
         return true;
     }
 
-    $('#login-form').disableAutoFill({
-        'passwordFiled': '.icon_password',
-        'callback': function() {
-            return checkForm();
-        }
+    function enablePlugin() {
+        $('#login-form').disableAutoFill({
+            'passwordFiled': '.password',
+            'callback': function() {
+                return checkForm();
+            }
+        });
+        $('#source-changes').html($('#origin-source').html().trim());
+    }
+
+    $('#source-changes').html($('#origin-source').html().trim());
+
+    $('input').on('keyup', function(event) {
+        $('#source-changes').html($('#origin-source').html().trim());
     });
 
     </script>

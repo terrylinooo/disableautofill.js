@@ -16,7 +16,13 @@
     var _helper = {};
 
     _helper.passwordlistener = function(obj, settings) {
-        $(settings.passwordFiled).on('keyup', function() {
+        var passObj = (settings.passwordFiled == '') ? '.disabledAutoFillPassword' : settings.passwordFiled;
+ 
+        if ($(obj).find('[type=password]').length > 0) {
+            $(obj).find('[type=password]').attr('type', 'text').addClass('disabledAutoFillPassword');
+        }
+
+        $(passObj).on('keyup', function() {
             var tmpPassword = $(this).val();
             var passwordLen = tmpPassword.length;
 
@@ -100,7 +106,7 @@
     $.fn.disableAutoFill.defaults = {
         debugMode: false,
         textToPassword: true,
-        passwordFiled: '.password',
+        passwordFiled: '',
         submitButton: '',
         callback: function() {
             return true;
