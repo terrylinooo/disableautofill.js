@@ -15,7 +15,7 @@
     var realFields = [];
     var _helper = {};
 
-    _helper.passwordlistener = function(obj, settings) {
+    _helper.passwordListener = function(obj, settings) {
         var passObj = (settings.passwordFiled == '') ? '.disabledAutoFillPassword' : settings.passwordFiled;
  
         if ($(obj).find('[type=password]').length > 0) {
@@ -40,21 +40,21 @@
      * Helper function
      * - Replace submit button to normal button to make sure everything works fine.
      */
-    _helper.formSubmitlistener = function(obj, settings) {
+    _helper.formSubmitListener = function(obj, settings) {
         var btnObj = (settings.submitButton == '') ? '.disableAutoFillSubmit' : settings.submitButton;
 
         $(btnObj).on('click', function(event) {
             _helper.restoreInput(obj, settings);
-
+ 
             if (settings.callback.call()) {
                 if (settings.debugMode) {
                     console.log(obj.serialize())
                 } else {
                     obj.submit();
                 }
-            } else {
-                
-            }
+            } 
+            _helper.randomizeInput(obj, settings);
+            _helper.passwordListener(obj, settings);
         });
     };
 
@@ -63,7 +63,7 @@
      * - Add random chars on "name" attribute to avid Browser remember what you submitted before.
      */
     _helper.randomizeInput = function(obj, settings) {
-        $(obj).find('input').each(function(i) {
+        obj.find('input').each(function(i) {
             realFields[i] = $(this).attr('name');
             $(this).attr('name', Math.random().toString(36).replace(/[^a-z]+/g, ''));
         });
@@ -75,7 +75,7 @@
      * - Restore password from star signs to original input password.
      */
     _helper.restoreInput = function(obj, settings) {
-        $(obj).find('input').each(function(i) {
+        obj.find('input').each(function(i) {
             $(this).attr('name', realFields[i]);
         });
 
@@ -101,8 +101,8 @@
         }
 
         _helper.randomizeInput(this, settings);
-        _helper.passwordlistener(this, settings);
-        _helper.formSubmitlistener(this, settings);
+        _helper.passwordListener(this, settings);
+        _helper.formSubmitListener(this, settings);
     };
 
     $.fn.disableAutoFill.defaults = {

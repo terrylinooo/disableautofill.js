@@ -9,7 +9,7 @@
     <link href="assets/css/style.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.disableAutoFill.min.js"></script>
+    <script src="assets/js/jquery.disableAutoFill.js"></script>
 </head>
 <body>
     <a href="https://github.com/terrylinooo/jquery.disableAutoFill">
@@ -26,7 +26,7 @@
     </div>
     <div class = "container">
         <div class="wrapper">
-            <form action="" id="login-form" method="post" class="form-signin">       
+            <form action="?submit=1" id="login-form" method="post" class="form-signin">       
                 <h3 class="form-signin-heading">Login</h3>
                 <hr class="colorgraph"><br>
                 <div id="origin-source">
@@ -45,6 +45,7 @@
     <div class="footer">
         Powered by Terry Lin. The <a href="https://en.dictpedia.org">Dictpedia</a> founder & developer. 
     </div>
+
 
     <script>
 
@@ -66,20 +67,48 @@
 
     function enablePlugin() {
         $('#login-form').disableAutoFill({
-            'passwordFiled': '.password',
-            'callback': function() {
+            passwordFiled: '.password',
+            debugMode: false,
+            callback: function() {
                 return checkForm();
             }
         });
         $('#source-changes').html($('#origin-source').html().trim());
     }
 
-    $('#source-changes').html($('#origin-source').html().trim());
-
-    $('input').on('keyup', function(event) {
+    $(function() {
         $('#source-changes').html($('#origin-source').html().trim());
+
+        $('input').on('keyup', function(event) {
+            $('#source-changes').html($('#origin-source').html().trim());
+        });
+
+        $('#login-form').on('submit', function(event) {
+            $('#demo-form-ouput').html($(this).serialize());
+            $('#demo-modal').modal('show');
+            event.preventDefault();
+            return false;
+        });
     });
 
     </script>
+    <div id="demo-modal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Demo</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Form serialized data:</p>
+                    <textarea id="demo-form-ouput"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="window.location.reload();">Reload demo</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
