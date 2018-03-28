@@ -11,6 +11,15 @@ I've spent serveral hours surfing online to look for solutions in order to disab
 
 After having tried all possible solutions I can find on Stackoverflow, howerver, they are outdated and not working. Finally I figured out that Google Chrome forces dropping the submission history while a form contains "type=password" field, so I spent 30 minutes to create this plugin to solve my problem, and yours.
 
+### Install
+
+```
+bower install jquery.disableAutoFill
+```
+```
+<script src="/[your_bower_path]/jquery.disableAutoFill/src/jquery.disableAutoFill.min.js"></script>
+```
+
 ### Demo
 
 https://terrylinooo.github.io/jquery.disableAutoFill/
