@@ -3,9 +3,9 @@
  * Te easiest solution for disabling Google Chrome auto-fill, auto-complete functions.
  *
  * @license MIT
- * @version 1.0
+ * @version 1.2
  * @author  Terry, https://github.com/terrylinooo/
- * @updated 2018-03-27
+ * @updated 2018-03-29
  * @link    https://github.com/terrylinooo/jquery.disableAutoFill
  */
 
@@ -18,8 +18,8 @@
     _helper.passwordListener = function(obj, settings) {
         var passObj = (settings.passwordFiled == '') ? '.disabledAutoFillPassword' : settings.passwordFiled;
  
-        if ($(obj).find('[type=password]').length > 0) {
-            $(obj).find('[type=password]').attr('type', 'text').addClass('disabledAutoFillPassword');
+        if (obj.find('[type=password]').length > 0) {
+            obj.find('[type=password]').attr('type', 'text').addClass('disabledAutoFillPassword');
         }
 
         $(passObj).on('keyup', function() {
