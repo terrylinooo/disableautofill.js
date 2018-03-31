@@ -20,6 +20,13 @@ bower install jquery.disableAutoFill
 <script src="/[your_bower_path]/jquery.disableAutoFill/src/jquery.disableAutoFill.min.js"></script>
 ```
 
+or
+
+```
+<script src="https://terrylinooo.github.io/jquery.disableAutoFill/assets/js/jquery.disableAutoFill.min.js"></script>
+```
+
+
 ### Demo
 
 https://terrylinooo.github.io/jquery.disableAutoFill/
