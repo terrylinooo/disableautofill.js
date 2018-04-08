@@ -5,14 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>jQuery.disableAutoFill plugin - User Guide</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet" />
+    <!-- jQuery & Bootstrap //-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery.disableAutoFill //-->
+    <script>
+        document.write('<link href="assets/css/style.css?v=' + Math.random() + '" rel="stylesheet">');
+        document.write('<script src="assets/js/jquery.disableAutoFill.js?v=' + Math.random() + '"><\/script>');
+    </script>
+    <!-- Syntax highlighting //-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
-    <script src="assets/js/jquery.disableAutoFill.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css" rel="stylesheet">
 </head>
 <body>
     <a href="https://github.com/terrylinooo/jquery.disableAutoFill">
@@ -35,7 +40,7 @@
                 <div id="origin-source">
                     <input type="text" class="form-control" name="username" placeholder="Username" />
                     <input type="password" class="form-control password" name="password" placeholder="Password" />     		  
-                    <button class="btn btn-lg btn-primary btn-block" name="submit" value="Login" type="Submit">Login</button>
+                    <button class="btn btn-lg btn-primary btn-block" name="demo-submit" value="Login" type="Submit">Login</button>
                 </div>  			
             </form>
             <div class="form-signin demo-source">
@@ -117,6 +122,13 @@ function checkForm() {
         $('#source-changes').html($('#origin-source').html().trim());
     }
 
+    var isSubmit = false;
+
+    function submitThisForm() {
+        isSubmit = true;
+        $('#login-form')[0].submit();
+    }
+
     $(function() {
 
         $('pre code').each(function(i, block) {
@@ -130,10 +142,12 @@ function checkForm() {
         });
 
         $('#login-form').on('submit', function(event) {
-            $('#demo-form-ouput').html($(this).serialize());
-            $('#demo-modal').modal('show');
-            event.preventDefault();
-            return false;
+            if (!isSubmit) {
+                $('#demo-form-ouput').html($(this).serialize());
+                $('#demo-modal').modal('show');
+                event.preventDefault();
+                return false;
+            }
         });
     });
 
@@ -151,6 +165,7 @@ function checkForm() {
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" onclick="submitThisForm();return false;">Submit</button>
                     <button type="button" class="btn btn-primary" onclick="window.location.reload();">Reload demo</button>
                 </div>
             </div>

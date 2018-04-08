@@ -20,11 +20,18 @@ bower install jquery.disableAutoFill
 <script src="/[your_bower_path]/jquery.disableAutoFill/src/jquery.disableAutoFill.min.js"></script>
 ```
 
+or
+
+```
+<script src="https://terrylinooo.github.io/jquery.disableAutoFill/assets/js/jquery.disableAutoFill.min.js"></script>
+```
+
+
 ### Demo
 
 https://terrylinooo.github.io/jquery.disableAutoFill/
 
-Checkout the demo page to see how it works.
+Check out the demo page to see how it works.
 
 ### Usage
 
@@ -42,14 +49,14 @@ $('#login-form').disableAutoFill();
 
 option | default | note 
 ---- | --- | ---
-passwordFiled | - | Dom Element by ID or by ClassName, if not set, disableAutoFill automaticlly pick up the [**type=passoword**] field.
-submitButton | - | Dom Element by ID or by ClassName, if not set, disableAutoFill automaticlly pick up the [**type=submit**] button.
+passwordFiled | - | Dom Element by ID or by ClassName, if not set, disableAutoFill will automaticlly pick up the [**type=passoword**] field.
+submitButton | - | Dom Element by ID or by ClassName, if not set, disableAutoFill will automaticlly pick up the [**type=submit**] button.
 debugMode | false | If true, printing form serialized data in console log instead of submitting.
+randomizeInputName | true | This plugin will randomize <i><strong>input name attribute</strong></i> by default. It will restore back to original field name when submitting form. This is for preventing auto completion for all browsers (includes third-party auto-completeion extensions) not just for Google Chrome.
 callback | - | To validate form fields or something you can do.
 
-
-
 ### Example
+
 ```javascript
 $('#login-form').disableAutoFill({
     passwordFiled: '.password',

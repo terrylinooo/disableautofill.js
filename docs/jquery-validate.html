@@ -5,15 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>jQuery.disableAutoFill plugin - example - jQuery Validate</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet" />
+    <!-- jQuery & Bootstrap //-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery.disableAutoFill //-->
+    <script>
+        document.write('<link href="assets/css/style.css?v=' + Math.random() + '" rel="stylesheet">');
+        document.write('<script src="assets/js/jquery.disableAutoFill.js?v=' + Math.random() + '"><\/script>');
+    </script>
+    <!-- Syntax highlighting //-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
-    <script src="assets/js/jquery.disableAutoFill.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css" rel="stylesheet">
+    <!-- jQuery Validate //-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
 </head>
 <body>
     <a href="https://github.com/terrylinooo/jquery.disableAutoFill">
@@ -63,6 +69,7 @@ $('.form-signin').disableAutoFill({
 <ul>
     <li><a href="index.html">Main demo page</a></li>
     <li>jQuery.validate() demo page</li>
+
 </ul>
 </div>
                 </div>
