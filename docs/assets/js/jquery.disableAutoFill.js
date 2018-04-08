@@ -52,8 +52,10 @@
                 } else {
                     obj.submit();
                 }
-            } 
-            _helper.randomizeInput(obj, settings);
+            }
+            if (settings.randomizeInputName) {
+                _helper.randomizeInput(obj, settings);
+            }
             _helper.passwordListener(obj, settings);
         });
     };
@@ -75,10 +77,11 @@
      * - Restore password from star signs to original input password.
      */
     _helper.restoreInput = function(obj, settings) {
-        obj.find('input').each(function(i) {
-            $(this).attr('name', realFields[i]);
-        });
-
+        if (settings.randomizeInputName) {
+            obj.find('input').each(function(i) {
+                $(this).attr('name', realFields[i]);
+            });
+        }
         if (settings.textToPassword) {
             $(settings.passwordFiled).attr('type', 'password');
         }
@@ -100,7 +103,9 @@
             this.find('[type=submit]').attr('type', 'button').addClass('disableAutoFillSubmit');
         }
 
-        _helper.randomizeInput(this, settings);
+        if (settings.randomizeInputName) {
+            _helper.randomizeInput(this, settings);
+        }
         _helper.passwordListener(this, settings);
         _helper.formSubmitListener(this, settings);
     };
@@ -108,6 +113,7 @@
     $.fn.disableAutoFill.defaults = {
         debugMode: false,
         textToPassword: true,
+        randomizeInputName: true,
         passwordFiled: '',
         submitButton: '',
         callback: function() {

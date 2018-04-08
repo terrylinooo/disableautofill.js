@@ -4,12 +4,13 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>jQuery.disableAutoFill plugin - User Guide</title>
+    <title>jQuery.disableAutoFill plugin - example - jQuery Validate</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
     <script src="assets/js/jquery.disableAutoFill.js"></script>
@@ -33,8 +34,8 @@
                 <h3 class="form-signin-heading">Login</h3>
                 <hr class="colorgraph"><br>
                 <div id="origin-source">
-                    <input type="text" class="form-control" name="username" placeholder="Username" />
-                    <input type="password" class="form-control password" name="password" placeholder="Password" />     		  
+                    <input type="text" class="form-control required" name="username" placeholder="Username" />
+                    <input type="password" class="form-control password required" name="password" placeholder="Password" />     		  
                     <button class="btn btn-lg btn-primary btn-block" name="submit" value="Login" type="Submit">Login</button>
                 </div>  			
             </form>
@@ -42,76 +43,46 @@
                 <button class="btn btn-primary" onclick="enablePlugin()">Enable plugin</button>
                  - <a href="https://github.com/terrylinooo/jquery.disableAutoFill">Read document</a>
                 <textarea id="source-changes" style="width: 100%; height: 300px"></textarea>
-                <div class="tips"><br />
-                    This plugin will randomize <i><strong>input name attribute</strong></i> by default. It will restore back to original field name when submitting form. This is for preventing auto completion for all browsers (includes third-party auto-completeion extensions) not just for Google Chrome.
-                </div><br />
                 <h4>Javascript</h4>
+<pre><code class="javascript">
+// Enable jQuery Validate plugin
+$('.form-signin').validate();
 
-                <pre><code class="javascript">
-$('#login-form').disableAutoFill({
+// Enable jQuery disableAutoFill plugin
+$('.form-signin').disableAutoFill({
     passwordFiled: '.password',
     debugMode: false,
     randomizeInputName: true,
     callback: function() {
-        return checkForm();
+        return $('.form-signin').valid();
     }
 });
 
-function checkForm() {
-    form = document.getElementById('login-form');
-
-    if (form.password.value == '') {
-        alert('Cannot leave Password field blank.');
-        form.password.focus();
-        return false;
-    }
-    if (form.username.value == '') {
-        alert('Cannot leave User Id field blank.');
-        form.username.focus();
-        return false;
-    }
-    return true;
-}
-
-            </code></pre>
-            <h4>Examples</h4>
-            <ul>
-                <li>Main demo page</li>
-                <li><a href="jquery-validate.html">jQuery.validate() demo page</a></li>
-            </ul>
+</code></pre>
+<h4>Examples</h4>
+<ul>
+    <li><a href="index.html">Main demo page</a></li>
+    <li>jQuery.validate() demo page</li>
+</ul>
+</div>
+                </div>
             </div>
         </div>
     </div>
     <div class="footer">
-        Powered by Terry Lin. The <a href="https://en.dictpedia.org">Dictpedia</a> founder & developer. 
+        Powered by Terry Lin. The <a href="https://zh.dictpedia.org">Dictpedia</a> founder & developer. 
     </div>
 
 
     <script>
 
-    function checkForm() {
-        form = document.getElementById('login-form');
-
-        if (form.password.value == '') {
-            alert('Cannot leave Password field blank.');
-            form.password.focus();
-            return false;
-        }
-        if (form.username.value == '') {
-            alert('Cannot leave User Id field blank.');
-            form.username.focus();
-            return false;
-        }
-        return true;
-    }
-
     function enablePlugin() {
-        $('#login-form').disableAutoFill({
+        $('.form-signin').disableAutoFill({
             passwordFiled: '.password',
             debugMode: false,
             randomizeInputName: true,
             callback: function() {
-                return checkForm();
+                return $('.form-signin').valid();
             }
         });
         $('#source-changes').html($('#origin-source').html().trim());
@@ -123,6 +94,8 @@ function checkForm() {
             hljs.highlightBlock(block);
         });
 
+        $('.form-signin').validate();
+
         $('#source-changes').html($('#origin-source').html().trim());
 
         $('input').on('keyup', function(event) {
@@ -130,14 +103,17 @@ function checkForm() {
         });
 
         $('#login-form').on('submit', function(event) {
-            $('#demo-form-ouput').html($(this).serialize());
-            $('#demo-modal').modal('show');
+            if ($('.form-signin').valid()) {
+                $('#demo-form-ouput').html($(this).serialize());
+                $('#demo-modal').modal('show');
+            }
             event.preventDefault();
             return false;
         });
     });
 
     </script>
+
     <div id="demo-modal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -156,12 +132,5 @@ function checkForm() {
             </div>
         </div>
     </div>
-
-    <style>
-.hljs {
-    white-space: pre;
-    overflow-x: auto;
-}
-    </style>
 </body>
 </html>
