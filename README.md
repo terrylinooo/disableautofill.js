@@ -99,6 +99,8 @@ $(function() {
 });
 ```
 
+<iframe width="100%" height="300" src="//jsfiddle.net/terrylinooo/hhgzbsvy/embedded/" allowpaymentrequest allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
 ### License
 
 MIT
