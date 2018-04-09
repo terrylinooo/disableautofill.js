@@ -84,18 +84,18 @@ function checkForm() {
 ### Suggestion
 
 This plugin may not work while the javascript render speed is slow. 
-Chrome detects the **type="password"*** and still assign the "remember me" to the form elements.
+Chrome detects the **type="password"** and still assign the "remember me" to the form elements.
 
 You can modify the input type="password" to "text", and add a class (for example: ".password")
 
-```
+```html
 <input type="text" name="password" class="password">
 ```
-```
+```javascript
 $(function() {
-  $('.login-form').disableAutoFill({
-  	passwordFiled: '.password'
-  });
+    $('.login-form').disableAutoFill({
+        passwordFiled: '.password'
+    });
 });
 ```
 
