@@ -1,6 +1,6 @@
 /**
  * Jquery - DisableAutoFill plugin
- * Te easiest solution for disabling Google Chrome auto-fill, auto-complete functions.
+ * The easiest solution for disabling Google Chrome auto-fill, auto-complete functions.
  *
  * @license MIT
  * @version 1.2
