@@ -3,9 +3,9 @@
  * The easiest solution for disabling Google Chrome auto-fill, auto-complete functions.
  *
  * @license MIT
- * @version 1.2
+ * @version 1.2.1
  * @author  Terry, https://github.com/terrylinooo/
- * @updated 2018-03-29
+ * @updated 2018-07-25
  * @link    https://github.com/terrylinooo/jquery.disableAutoFill
  */
 
@@ -22,7 +22,7 @@
             obj.find('[type=password]').attr('type', 'text').addClass('disabledAutoFillPassword');
         }
 
-        $(passObj).on('keyup', function() {
+        $(obj).on('keyup', passObj, function() {
             var tmpPassword = $(this).val();
             var passwordLen = tmpPassword.length;
 
@@ -43,7 +43,7 @@
     _helper.formSubmitListener = function(obj, settings) {
         var btnObj = (settings.submitButton == '') ? '.disableAutoFillSubmit' : settings.submitButton;
 
-        $(btnObj).on('click', function(event) {
+        $(obj).on('click', btnObj, function(event) {
             _helper.restoreInput(obj, settings);
  
             if (settings.callback.call()) {
@@ -83,10 +83,10 @@
             });
         }
         if (settings.textToPassword) {
-            $(settings.passwordFiled).attr('type', 'password');
+            obj.find(settings.passwordFiled).attr('type', 'password');
         }
 
-        $(settings.passwordFiled).val(realPassword.join(''));
+        obj.find(settings.passwordFiled).val(realPassword.join(''));
     };
 
     /**
@@ -102,6 +102,9 @@
         if (this.find('[type=submit]').length > 0) {
             this.find('[type=submit]').attr('type', 'button').addClass('disableAutoFillSubmit');
         }
+
+        // Add autocomplete attribute to form, and set it to 'off'
+        this.attr('autocomplete', 'off');
 
         if (settings.randomizeInputName) {
             _helper.randomizeInput(this, settings);
