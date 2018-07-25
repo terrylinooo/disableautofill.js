@@ -3,13 +3,16 @@ The easiest solution for disabling Google Chrome auto-fill, auto-complete functi
 
 ----
 
-### Why
 
 I've spent serveral hours surfing online to look for solutions in order to disable Google Chrome auto-fill, auto-complate functions such as the screenshot below. 
 
 ![Image](https://i.imgur.com/j5Mw1ly.png)
 
-After having tried all possible solutions I can find on Stackoverflow, howerver, they are outdated and not working. Finally I figured out that Google Chrome forces dropping the submission history while a form contains "type=password" field, so I spent 30 minutes to create this plugin to solve my problem, and yours.
+After having tried all possible solutions I can find on Stackoverflow, howerver, they are outdated and not working. Finally I figured out that Google Chrome forces dropping the submission history while a form contains `type="password"` field, so this plugin is to do the following steps:
+
+- Replace `type="password"` to `type="text"` and then replace the text with asterisks.
+- Add an attribute `autocomplete="off"` on form.
+- Randomize the input `name` value to prevent Chrome or other third-party extensions to remember what you filled.
 
 ### Install
 
