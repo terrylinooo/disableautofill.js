@@ -15,6 +15,10 @@
     var realFields = [];
     var _helper = {};
 
+    Array.prototype.insert = function (index, item) {
+        this.splice(index, 0, item);
+    };
+
     _helper.passwordListener = function(obj, settings) {
         var passObj = (settings.passwordFiled == '') ? '.disabledAutoFillPassword' : settings.passwordFiled;
  
@@ -26,13 +30,29 @@
             var tmpPassword = $(this).val();
             var passwordLen = tmpPassword.length;
 
+            // Get current keyup character position.
+            var currKeyupPos = this.selectionStart;
+
             for (var i = 0; i < passwordLen; i++) {
                 if (tmpPassword[i] != '*') {
-                    realPassword[i] = tmpPassword[i];
+                    if (typeof realPassword[i] == 'undefined') {
+                        realPassword[i] = tmpPassword[i];
+                    } else {
+                        if (currKeyupPos != passwordLen) {
+                            realPassword.insert(currKeyupPos - 1, tmpPassword[i]);
+                        }
+                    }
                 }
             }
-            realPassword = realPassword.slice(0, passwordLen);
+
             $(this).val(tmpPassword.replace(/./g, '*'));
+
+            if (settings.debugMode) {
+                console.log('Current keyup position: ' + currKeyupPos);
+                console.log('Password length: ' + passwordLen);
+                console.log('Real password:');
+                console.log(realPassword);
+            }
         });
     }
 
