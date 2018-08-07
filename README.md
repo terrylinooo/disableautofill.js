@@ -5,11 +5,6 @@ Document Transations: [English](./README.md) | [繁體中文](./README_zh_TW.md)
 
 ----
 
-Do you need a [WordPress theme built for develoers](https://terryl.in/githuber)? It's called Githuber and license is under GPLv3. Check out online demo https://terryl.in/githuber and give me some suggestions to improve it! Hope you like it.
-
-----
-
-
 I've spent serveral hours surfing online to look for solutions in order to disable Google Chrome auto-fill, auto-complate functions such as the screenshot below. 
 
 ![Image](https://i.imgur.com/j5Mw1ly.png)
