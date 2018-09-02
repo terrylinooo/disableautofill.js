@@ -5,7 +5,6 @@ Document Transations: [English](./README.md) | [繁體中文](./README_zh_TW.md)
 
 ----
 
-
 I've spent serveral hours surfing online to look for solutions in order to disable Google Chrome auto-fill, auto-complate functions such as the screenshot below. 
 
 ![Image](https://i.imgur.com/j5Mw1ly.png)
