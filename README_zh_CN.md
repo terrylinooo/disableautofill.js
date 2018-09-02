@@ -10,7 +10,7 @@ Document Transations: [English](./README.md) | [繁體中文](./README_zh_TW.md)
 
 ![Image](https://i.imgur.com/j5Mw1ly.png)
 
-在试了几乎所有可能在 Stackoverflow 能找到的方法，相关的讨论串都看遍了，提到的几乎已经过时，没有作用。但后来发现了只要是表单中存在 `type="password"` 栏位，Google Chrome 就会强迫丢出提交的历史记录，因为这个 plugin 进行了以下步骤来避免:
+在试了几乎所有可能在 Stackoverflow 能找到的方法，相关的讨论串都看遍了，提到的几乎已经过时，没有作用。但后来发现了只要是表单中存在 `type="password"` 栏位，Google Chrome 就会强迫丢出提交的历史记录，因此这个 plugin 采取以下步骤以避免这种情况发生:
 
 - 把 `type="password"` 取代为 `type="text"` 然后把输入的文字取代为万用字元 `*`，也就是原本保护密码不可看的机制。
 - 在表单加入 `autocomplete="off"` 属性，针对较旧版本有效。
@@ -30,7 +30,6 @@ bower install jquery.disableAutoFill
 ```
 <script src="https://terrylinooo.github.io/jquery.disableAutoFill/assets/js/jquery.disableAutoFill.min.js"></script>
 ```
-
 
 ### 线上范例
 
@@ -58,7 +57,7 @@ passwordFiled | - | DOM 元素用 ID 或使用 ClassName 指定, 如果没有设
 submitButton | - | DOM 元素用 ID 或使用 ClassName 指定, 如果没有设定, disableAutoFill 会自动找寻 [**type=submit**] 按纽。
 debugMode | false | 设为 true 的话会在 console.log 印讯息。
 randomizeInputName | true | 会自动把 <i><strong>input name attribute</strong></i> 以随机的字串取代。然后在提交表单时复原至原始的栏位名称，这么做是避免 Google Chrome 和其它第三方拓展及其它浏览器会记住曾输入的讯息。
-设这个选项为“true”来启用HTML原生的表单验证功能 (`required`，`pattern`及其它相关属性...)
+设这个选项为“true”来启用 HTML 5 原生的表单验证功能 (`required`，`pattern`及其它相关属性...)
 callback | - | 送出表单时的回呼，可以用来执行验证栏位等等。
 
 ### 例子
