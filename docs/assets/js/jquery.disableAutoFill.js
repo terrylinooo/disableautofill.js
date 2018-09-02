@@ -3,7 +3,7 @@
  * The easiest solution for disabling Google Chrome auto-fill, auto-complete functions.
  *
  * @license MIT
- * @version 1.2.3
+ * @version 1.2.4
  * @author  Terry, https://github.com/terrylinooo/
  * @updated 2018-08-01
  * @link    https://github.com/terrylinooo/jquery.disableAutoFill
@@ -11,14 +11,26 @@
 
 (function($) {
 
+    'use strict';
+
     var realPassword = [];
     var realFields = [];
+
+    // An Object for Helper functions.
     var _helper = {};
 
+    // Extend the Array: add "insert" function.
     Array.prototype.insert = function (index, item) {
         this.splice(index, 0, item);
     };
 
+    /**
+     * Helper function - passwordListener
+     * - Hide the original password string.
+     *
+     * @param {object} obj      jQuery DOM object (form)
+     * @param {object} settings plugin settings.
+     */
     _helper.passwordListener = function(obj, settings) {
         var passObj = (settings.passwordFiled == '') ? '.disabledAutoFillPassword' : settings.passwordFiled;
  
@@ -26,7 +38,7 @@
             obj.find('[type=password]').attr('type', 'text').addClass('disabledAutoFillPassword');
         }
 
-        $(obj).on('keyup', passObj, function() {
+        obj.on('keyup', passObj, function() {
             var tmpPassword = $(this).val();
             var passwordLen = tmpPassword.length;
 
@@ -57,32 +69,44 @@
     }
 
     /**
-     * Helper function
+     * Helper function - formSubmitListener
      * - Replace submit button to normal button to make sure everything works fine.
+     * 
+     * @param {object} obj      jQuery DOM object (form)
+     * @param {object} settings plugin settings.
      */
     _helper.formSubmitListener = function(obj, settings) {
         var btnObj = (settings.submitButton == '') ? '.disableAutoFillSubmit' : settings.submitButton;
 
-        $(obj).on('click', btnObj, function(event) {
+        obj.on('click', btnObj, function(event) {
             _helper.restoreInput(obj, settings);
- 
+
             if (settings.callback.call()) {
                 if (settings.debugMode) {
                     console.log(obj.serialize())
                 } else {
-                    obj.submit();
+                    // Native HTML form validation requires "type=submit" to work with.
+                    if (settings.html5FormValidate) {
+                        $(btnObj).attr('type', 'submit').trigger('submit');
+                        // Change "type=submit" back to "type=button".
+                        setTimeout(function() {
+                            $(btnObj).attr('type', 'button');
+                        }, 1000);
+                        
+                    } else {
+                        obj.submit();
+                    }
                 }
             }
-            if (settings.randomizeInputName) {
-                _helper.randomizeInput(obj, settings);
-            }
-            _helper.passwordListener(obj, settings);
         });
     };
 
     /**
-     * Helper function
+     * Helper function - ramdomizeInput
      * - Add random chars on "name" attribute to avid Browser remember what you submitted before.
+     * 
+     * @param {object} obj      jQuery DOM object (form)
+     * @param {object} settings plugin settings.
      */
     _helper.randomizeInput = function(obj, settings) {
         obj.find('input').each(function(i) {
@@ -92,9 +116,12 @@
     };
 
     /**
-     * Helper function
+     * Helper function - restoreInput
      * - Remove random chars on "name" attribute, so we can submit correct data then.
      * - Restore password from star signs to original input password.
+     *
+     * @param {object} obj      jQuery DOM object (form)
+     * @param {object} settings plugin settings.
      */
     _helper.restoreInput = function(obj, settings) {
         if (settings.randomizeInputName) {
@@ -119,18 +146,23 @@
             options
         );
 
-        if (this.find('[type=submit]').length > 0) {
-            this.find('[type=submit]').attr('type', 'button').addClass('disableAutoFillSubmit');
-        }
-
         // Add autocomplete attribute to form, and set it to 'off'
         this.attr('autocomplete', 'off');
+
+        if (this.find('[type=submit]').length > 0) {
+            this.find('[type=submit]').addClass('disableAutoFillSubmit').attr('type', 'button');
+        }
+
+        if (settings.submitButton != '') {
+            this.find(settings.submitButton).addClass('disableAutoFillSubmit').attr('type', 'button');
+        }
 
         if (settings.randomizeInputName) {
             _helper.randomizeInput(this, settings);
         }
         _helper.passwordListener(this, settings);
         _helper.formSubmitListener(this, settings);
+        
     };
 
     $.fn.disableAutoFill.defaults = {
@@ -138,6 +170,7 @@
         textToPassword: true,
         randomizeInputName: true,
         passwordFiled: '',
+        html5FormValidate: false,
         submitButton: '',
         callback: function() {
             return true;

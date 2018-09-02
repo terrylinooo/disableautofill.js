@@ -38,10 +38,12 @@
                 <h3 class="form-signin-heading">Login</h3>
                 <hr class="colorgraph"><br>
                 <div id="origin-source">
-                    <input type="text" class="form-control" name="username" placeholder="Username" />
-                    <input type="text" class="form-control password" name="password" placeholder="Password" />     		  
+                    <label>Example: "jack" or "mark"</label>
+                    <input type="text" class="form-control" name="username" placeholder="Username" required pattern="jack|mark" />
+                    <label>Example: [0-9a-zA-Z]+</label>
+                    <input type="text" class="form-control password" name="password" placeholder="Password" required pattern="[0-9a-zA-Z]+" />
                     <button class="btn btn-lg btn-primary btn-block" name="demo-submit" value="Login" type="Submit">Login</button>
-                </div>  			
+                </div>		
             </form>
             <div class="form-signin demo-source">
                 <button class="btn btn-primary" onclick="enablePlugin()">Enable plugin</button>
@@ -57,33 +59,16 @@ $('#login-form').disableAutoFill({
     passwordFiled: '.password',
     debugMode: false,
     randomizeInputName: true,
-    callback: function() {
-        return checkForm();
-    }
+    html5FormValidate: true
 });
 
-function checkForm() {
-    form = document.getElementById('login-form');
-
-    if (form.password.value == '') {
-        alert('Cannot leave Password field blank.');
-        form.password.focus();
-        return false;
-    }
-    if (form.username.value == '') {
-        alert('Cannot leave User Id field blank.');
-        form.username.focus();
-        return false;
-    }
-    return true;
-}
 
             </code></pre>
             <h4>Examples</h4>
             <ul>
-                <li>Main demo page</li>
+                <li>HTML 5 Native form validate</li>
                 <li><a href="jquery-validate.html">jQuery.validate() demo page</a></li>
-                <li><a href="html5-form-validate.html">HTML 5 Native form validate</a></li>
+                <li><a href="/">Main demo page</a></li>
             </ul>
             </div>
         </div>
@@ -95,30 +80,12 @@ function checkForm() {
 
     <script>
 
-    function checkForm() {
-        form = document.getElementById('login-form');
-
-        if (form.password.value == '') {
-            alert('Cannot leave Password field blank.');
-            form.password.focus();
-            return false;
-        }
-        if (form.username.value == '') {
-            alert('Cannot leave User Id field blank.');
-            form.username.focus();
-            return false;
-        }
-        return true;
-    }
-
     function enablePlugin() {
         $('#login-form').disableAutoFill({
             passwordFiled: '.password',
             debugMode: false,
             randomizeInputName: true,
-            callback: function() {
-                return checkForm();
-            }
+            html5FormValidate: true
         });
         $('#source-changes').html($('#origin-source').html().trim());
     }
@@ -143,6 +110,7 @@ function checkForm() {
         });
 
         $('#login-form').on('submit', function(event) {
+            $('#source-changes').html($('#origin-source').html().trim());
             if (!isSubmit) {
                 $('#demo-form-ouput').html($(this).serialize());
                 $('#demo-modal').modal('show');
