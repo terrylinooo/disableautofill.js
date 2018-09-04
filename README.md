@@ -33,7 +33,9 @@ or
 
 ### Demo
 
-https://terrylinooo.github.io/jquery.disableAutoFill/
+- [Login Form](https://terrylinooo.github.io/jquery.disableAutoFill/)
+- [Login Form & jQuery Validate plugin](https://terrylinooo.github.io/jquery.disableAutoFill/jquery-validate.html)
+- [Login Form & HTML 5 native form validation](https://terrylinooo.github.io/jquery.disableAutoFill/html5-form-validate.html)
 
 Check out the demo page to see how it works.
 
