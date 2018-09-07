@@ -34,7 +34,9 @@ bower install jquery.disableAutoFill
 
 ### 線上範例
 
-https://terrylinooo.github.io/jquery.disableAutoFill/
+- [登入表單](https://terrylinooo.github.io/jquery.disableAutoFill/)
+- [登入表單 & jQuery Validate 插件](https://terrylinooo.github.io/jquery.disableAutoFill/jquery-validate.html)
+- [登入表單 & HTML 5 原生表單驗證功能](https://terrylinooo.github.io/jquery.disableAutoFill/html5-form-validate.html)
 
 您可以查看此網址看看如何運作。
 
