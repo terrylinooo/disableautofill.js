@@ -53,7 +53,7 @@ $('#login-form').disableAutoFill();
 
 option | default | note
 ---- | --- | ---
-passwordFiled | - | DOM 元素用 ID 或使用 ClassName 指定, 如果没有设定, disableAutoFill 会自动找寻 [**type=password**] 的栏位。
+passwordField | - | DOM 元素用 ID 或使用 ClassName 指定, 如果没有设定, disableAutoFill 会自动找寻 [**type=password**] 的栏位。
 submitButton | - | DOM 元素用 ID 或使用 ClassName 指定, 如果没有设定, disableAutoFill 会自动找寻 [**type=submit**] 按纽。
 debugMode | false | 设为 true 的话会在 console.log 印讯息。
 randomizeInputName | true | 会自动把 <i><strong>input name attribute</strong></i> 以随机的字串取代。然后在提交表单时复原至原始的栏位名称，这么做是避免 Google Chrome 和其它第三方拓展及其它浏览器会记住曾输入的讯息。
@@ -64,7 +64,7 @@ callback | - | 送出表单时的回呼，可以用来执行验证栏位等等�
 
 ```javascript
 $('#login-form').disableAutoFill({
-    passwordFiled: '.password',
+    passwordField: '.password',
     callback: function() {
         return checkForm();
     }
@@ -98,7 +98,7 @@ function checkForm() {
 ```javascript
 $(function() {
     $('.login-form').disableAutoFill({
-        passwordFiled: '.password'
+        passwordField: '.password'
     });
 });
 ```
