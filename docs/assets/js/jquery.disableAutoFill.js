@@ -32,7 +32,7 @@
      * @param {object} settings plugin settings.
      */
     _helper.passwordListener = function(obj, settings) {
-        var passObj = (settings.passwordFiled == '') ? '.disabledAutoFillPassword' : settings.passwordFiled;
+        var passObj = (settings.passwordField == '') ? '.disabledAutoFillPassword' : settings.passwordField;
  
         if (obj.find('[type=password]').length > 0) {
             obj.find('[type=password]').attr('type', 'text').addClass('disabledAutoFillPassword');
@@ -130,10 +130,10 @@
             });
         }
         if (settings.textToPassword) {
-            obj.find(settings.passwordFiled).attr('type', 'password');
+            obj.find(settings.passwordField).attr('type', 'password');
         }
 
-        obj.find(settings.passwordFiled).val(realPassword.join(''));
+        obj.find(settings.passwordField).val(realPassword.join(''));
     };
 
     /**
@@ -169,7 +169,7 @@
         debugMode: false,
         textToPassword: true,
         randomizeInputName: true,
-        passwordFiled: '',
+        passwordField: '',
         html5FormValidate: false,
         submitButton: '',
         callback: function() {

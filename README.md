@@ -55,7 +55,7 @@ $('#login-form').disableAutoFill();
 
 option | default | note 
 ---- | --- | ---
-passwordFiled | - | Dom Element by ID or by ClassName, if not set, disableAutoFill will automaticlly pick up the [**type=password**] field.
+passwordField | - | Dom Element by ID or by ClassName, if not set, disableAutoFill will automaticlly pick up the [**type=password**] field.
 submitButton | - | Dom Element by ID or by ClassName, if not set, disableAutoFill will automaticlly pick up the [**type=submit**] button.
 debugMode | false | If true, printing form serialized data in console log instead of submitting.
 randomizeInputName | true | This plugin will randomize <i><strong>input name attribute</strong></i> by default. It will restore back to original field name when submitting form. This is for preventing auto completion for all browsers (includes third-party auto-completeion extensions) not just for Google Chrome.
@@ -66,7 +66,7 @@ callback | - | To validate form fields or something you can do.
 
 ```javascript
 $('#login-form').disableAutoFill({
-    passwordFiled: '.password',
+    passwordField: '.password',
     callback: function() {
         return checkForm();
     }
@@ -101,7 +101,7 @@ You can modify the input type="password" to "text", and add a class (for example
 ```javascript
 $(function() {
     $('.login-form').disableAutoFill({
-        passwordFiled: '.password'
+        passwordField: '.password'
     });
 });
 ```
