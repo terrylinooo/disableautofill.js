@@ -13,7 +13,7 @@ A clear and concise description of what the bug is.
 **Information**
  - OS: [e.g. iOS]
  - Browser [e.g. chrome, safari]
- - Extensions: Please list the possible extensions that installed in your browser and you think it may cause this issue. [e.g. Show Password]
+ - Extensions: Please list the one or more possible extensions that installed in your browser and you think they may cause this issue. [e.g. Show Password]
  - Version [e.g. Version 70.0.3538.102 (Official Build) (64-bit)]
 
 **Additional context**
