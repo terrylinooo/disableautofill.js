@@ -45,18 +45,28 @@
             // Get current keyup character position.
             var currKeyupPos = this.selectionStart;
 
-            for (var i = 0; i < passwordLen; i++) {
-                if (tmpPassword[i] != '*') {
-                    if (typeof realPassword[i] == 'undefined') {
-                        realPassword[i] = tmpPassword[i];
-                    } else {
-                        if (currKeyupPos != passwordLen) {
-                            realPassword.insert(currKeyupPos - 1, tmpPassword[i]);
-                        }
-                    }
-                }
-            }
+			for (var i = 0; i < passwordLen; i++) {
+				if (tmpPassword[i] != '*') {
+					realPassword[i] = tmpPassword[i];
+				}
+			}
 
+			if (passwordLen < realPassword.length) {
+				var diff = realPassword.length - passwordLen;
+
+				var key = event.keyCode || event.charCode;
+
+				// Check if last keypress was backspace or delete
+				if (key == 8 || key == 46) {
+					realPassword.splice(currKeyupPos, diff);
+				}
+				// User highlighted and overwrote a portion of the password
+				else {
+					realPassword.splice(currKeyupPos - 1, diff + 1);
+					realPassword.insert(currKeyupPos - 1, tmpPassword[currKeyupPos - 1]);
+				}
+			}
+			
             $(this).val(tmpPassword.replace(/./g, '*'));
 
             if (settings.debugMode) {
