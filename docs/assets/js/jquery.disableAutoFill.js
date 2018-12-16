@@ -15,6 +15,7 @@
 
     var realPassword = [];
     var realFields = [];
+    var realFieldsMapper = {};
 
     // An Object for Helper functions.
     var _helper = {};
@@ -121,7 +122,13 @@
     _helper.randomizeInput = function(obj, settings) {
         obj.find('input').each(function(i) {
             realFields[i] = $(this).attr('name');
-            $(this).attr('name', Math.random().toString(36).replace(/[^a-z]+/g, ''));
+            if(realFieldsMapper[realFields[i]]) {
+                $(this).attr('name', realFieldsMapper[realFields[i]]);
+            } else {
+                var randomName = Math.random().toString(36).replace(/[^a-z]+/g, '');
+                $(this).attr('name', randomName);
+                realFieldsMapper[realFields[i]] = randomName;
+            }
         });
     };
 
