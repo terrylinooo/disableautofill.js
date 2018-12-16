@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>jQuery.disableAutoFill plugin - User Guide</title>
+    <!-- jQuery & Bootstrap //-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery.disableAutoFill //-->
+    <script>
+        document.write('<link href="assets/css/style.css?v=' + Math.random() + '" rel="stylesheet">');
+        document.write('<script src="assets/js/jquery.disableAutoFill.js?v=' + Math.random() + '"><\/script>');
+    </script>
+    <!-- Syntax highlighting //-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css" rel="stylesheet">
+</head>
+<body>
+    <a href="https://github.com/terrylinooo/jquery.disableAutoFill">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png" alt="Fork me on GitHub">
+    </a>
+    <div class="header">
+        <h1 class="page-title">jQuery Disable Auto Fill Plugin</h1>
+        <p>The easiest solution for disabling Google Chrome auto-fill, auto-complete functions.</p>
+        <hr />
+        <p>
+            <iframe src="https://ghbtns.com/github-btn.html?user=terrylinooo&repo=jquery.disableAutoFill&type=star&count=true" frameborder="0" scrolling="0" width="120px" height="20px"></iframe>
+            <iframe src="https://ghbtns.com/github-btn.html?user=terrylinooo&type=follow&count=true" frameborder="0" scrolling="0" width="190px" height="20px"></iframe>
+        </p>
+    </div>
+    <div class = "container">
+        <div class="wrapper">
+            <form action="?submit=1" id="login-form" method="post" class="form-signin">       
+                <h3 class="form-signin-heading">Login</h3>
+                <hr class="colorgraph"><br>
+                <div id="origin-source">
+                    <div class="form-group">
+                        <label class="form-label">Username</label>
+                        <div>
+                            <input type="text" class="form-control" name="username" placeholder="Username" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <div>
+                            <input type="text" class="form-control password" name="password" placeholder="Password" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Gender</label>
+                        <div>
+                            <input type="radio" name="gender" value="male"> Male 
+                            <input type="radio" name="gender" value="female"> Female 
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Interests</label>
+                            <div>
+                                <input type="checkbox" name="interests[]" value="baseball"> Baseball 
+                                <input type="checkbox" name="interests[]" value="baseketball"> Basketball 
+                                <input type="checkbox" name="interests[]" value="tennis"> Tennis 
+                                <input type="checkbox" name="interests[]" value="run"> Run  
+                            </div>
+                        </div>
+                    <button class="btn btn-lg btn-primary btn-block" name="demo-submit" value="Login" type="Submit">Sign Up</button>
+                </div>  			
+            </form>
+            <div class="form-signin demo-source">
+                <button class="btn btn-primary" onclick="enablePlugin()">Enable plugin</button>
+                 - <a href="https://github.com/terrylinooo/jquery.disableAutoFill">Read document</a>
+                <textarea id="source-changes" style="width: 100%; height: 300px"></textarea>
+                <div class="tips"><br />
+                    This plugin will randomize <i><strong>input name attribute</strong></i> by default. It will restore back to original field name when submitting form. This is for preventing auto completion for all browsers (includes third-party auto-completeion extensions) not just for Google Chrome.
+                </div><br />
+                <h4>Javascript</h4>
+
+                <pre><code class="javascript">
+$('#login-form').disableAutoFill({
+    passwordField: '.password',
+    debugMode: false,
+    randomizeInputName: true,
+    callback: function() {
+        return checkForm();
+    }
+});
+
+function checkForm() {
+    form = document.getElementById('login-form');
+
+    if (form.password.value == '') {
+        alert('Cannot leave Password field blank.');
+        form.password.focus();
+        return false;
+    }
+    if (form.username.value == '') {
+        alert('Cannot leave User Id field blank.');
+        form.username.focus();
+        return false;
+    }
+    return true;
+}
+
+            </code></pre>
+            <h4>Examples</h4>
+            <ul>
+                <li>Main demo page</li>
+                <li><a href="jquery-validate.html">jQuery.validate() demo page</a></li>
+                <li><a href="html5-form-validate.html">HTML 5 Native form validate</a></li>
+            </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        Powered by Terry Lin. The <a href="https://en.dictpedia.org">Dictpedia</a> founder & developer. 
+    </div>
+
+
+    <script>
+
+    function checkForm() {
+        form = document.getElementById('login-form');
+
+        if (form.password.value == '') {
+            alert('Cannot leave Password field blank.');
+            form.password.focus();
+            return false;
+        }
+        if (form.username.value == '') {
+            alert('Cannot leave User Id field blank.');
+            form.username.focus();
+            return false;
+        }
+        return true;
+    }
+
+    function enablePlugin() {
+        $('#login-form').disableAutoFill({
+            passwordField: '.password',
+            debugMode: false,
+            randomizeInputName: true,
+            callback: function() {
+                return checkForm();
+            }
+        });
+        $('#source-changes').html($('#origin-source').html().trim());
+    }
+
+    var isSubmit = false;
+
+    function submitThisForm() {
+        isSubmit = true;
+        $('#login-form')[0].submit();
+    }
+
+    $(function() {
+
+        $('pre code').each(function(i, block) {
+            hljs.highlightBlock(block);
+        });
+
+        $('#source-changes').html($('#origin-source').html().trim());
+
+        $('input').on('keyup', function(event) {
+            $('#source-changes').html($('#origin-source').html().trim());
+        });
+
+        $('#login-form').on('submit', function(event) {
+            if (!isSubmit) {
+                $('#demo-form-ouput').html($(this).serialize());
+                $('#demo-modal').modal('show');
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+
+    </script>
+    <div id="demo-modal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Demo</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Form serialized data:</p>
+                    <textarea id="demo-form-ouput"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" onclick="submitThisForm();return false;">Submit</button>
+                    <button type="button" class="btn btn-primary" onclick="window.location.reload();">Reload demo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+.hljs {
+    white-space: pre;
+    overflow-x: auto;
+}
+    </style>
+</body>
+</html>
