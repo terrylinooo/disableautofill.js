@@ -105,7 +105,7 @@
                         }, 1000);
                         
                     } else {
-                        obj.submit();
+                        return true;
                     }
                 }
             }
