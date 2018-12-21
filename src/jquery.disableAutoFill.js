@@ -89,8 +89,8 @@
     _helper.formSubmitListener = function(obj, settings) {
         var btnObj = (settings.submitButton == '') ? '.disableAutoFillSubmit' : settings.submitButton;
 
-        obj.on('click', btnObj, function(event) {
-            _helper.restoreInput(obj, settings);
+        obj.on('submit', function() {
+        	_helper.restoreInput(obj, settings);
 
             if (settings.callback.call()) {
                 if (settings.debugMode) {
@@ -109,6 +109,10 @@
                     }
                 }
             }
+        });
+        
+        obj.on('click', btnObj, function(event) {
+            obj.submit();
         });
     };
 
