@@ -13,7 +13,7 @@
 
     'use strict';
 
-    var realPassword = [];
+    var realPasswordMapper = {};
     var realFields = [];
     var realFieldsMapper = {};
 
@@ -33,13 +33,21 @@
      * @param {object} settings plugin settings.
      */
     _helper.passwordListener = function(obj, settings) {
-        var passObj = (settings.passwordField == '') ? '.disabledAutoFillPassword' : settings.passwordField;
+        var passObj = (settings.passwordField === '') ? '.disabledAutoFillPassword' : settings.passwordField;
  
         if (obj.find('[type=password]').length > 0) {
             obj.find('[type=password]').attr('type', 'text').addClass('disabledAutoFillPassword');
         }
 
-        obj.on('keyup', passObj, function() {
+       
+
+        obj.on('keyup', passObj, function () {
+
+            if (!realPasswordMapper.hasOwnProperty(this.id))
+                realPasswordMapper[this.id] = [];
+
+            var realPassword = realPasswordMapper[this.id];
+
             var tmpPassword = $(this).val();
             var passwordLen = tmpPassword.length;
 
@@ -47,7 +55,7 @@
             var currKeyupPos = this.selectionStart;
 
             for (var i = 0; i < passwordLen; i++) {
-                if (tmpPassword[i] != '*') {
+                if (tmpPassword[i] !== '*') {
                     realPassword[i] = tmpPassword[i];
                 }
             }
@@ -150,7 +158,11 @@
             obj.find(settings.passwordField).attr('type', 'password');
         }
 
-        obj.find(settings.passwordField).val(realPassword.join(''));
+        obj.find(settings.passwordField).each(function (i, pwf) {
+            $(pwf).val(realPasswordMapper[pwf.id].join(''));
+        });      
+       
+       
     };
 
     /**
