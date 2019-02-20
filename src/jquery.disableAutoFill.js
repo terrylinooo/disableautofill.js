@@ -3,7 +3,7 @@
  * The easiest solution for disabling Google Chrome auto-fill, auto-complete functions.
  *
  * @license MIT
- * @version 1.2.6
+ * @version 1.2.7-beta
  * @author  Terry, https://github.com/terrylinooo/
  * @updated 2018-11-20
  * @link    https://github.com/terrylinooo/jquery.disableAutoFill
