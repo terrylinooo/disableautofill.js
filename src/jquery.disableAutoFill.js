@@ -13,9 +13,12 @@
 
     'use strict';
 
-    var realPasswordMapper = {};
     var realFields = [];
     var realFieldsMapper = {};
+
+    var realPasswordMapper = [];
+    var tmpPasswordMapper = [];
+    var passwordLenMapper = [];
 
     // An Object for Helper functions.
     var _helper = {};
@@ -39,17 +42,23 @@
             obj.find('[type=password]').attr('type', 'text').addClass('disabledAutoFillPassword');
         }
 
-       
-
         obj.on('keyup', passObj, function () {
 
-            if (!realPasswordMapper.hasOwnProperty(this.id))
-                realPasswordMapper[this.id] = [];
+            if (!this.id) {
+                this.id = Math.random().toString(36).substring(5);
+            }
 
+            if (!realPasswordMapper.hasOwnProperty(this.id)) {
+                realPasswordMapper[this.id] = [];
+            }
+ 
             var realPassword = realPasswordMapper[this.id];
 
-            var tmpPassword = $(this).val();
-            var passwordLen = tmpPassword.length;
+            tmpPasswordMapper[this.id] = $(this).val();
+            var tmpPassword = tmpPasswordMapper[this.id];
+
+            passwordLenMapper[this.id] = tmpPassword.length;
+            var passwordLen = passwordLenMapper[this.id];
 
             // Get current keyup character position.
             var currKeyupPos = this.selectionStart;
@@ -158,8 +167,8 @@
             obj.find(settings.passwordField).attr('type', 'password');
         }
 
-        obj.find(settings.passwordField).each(function (i, pwf) {
-            $(pwf).val(realPasswordMapper[pwf.id].join(''));
+        obj.find(settings.passwordField).each(function (i) {
+            $(this).val(realPasswordMapper[this.id].join(''));
         });      
        
        
