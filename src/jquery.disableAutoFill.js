@@ -64,7 +64,7 @@
             var currKeyupPos = this.selectionStart;
 
             for (var i = 0; i < passwordLen; i++) {
-                if (tmpPassword[i] !== '*') {
+                if (tmpPassword[i] !== settings.hiddingChar) {
                     realPassword[i] = tmpPassword[i];
                 }
             }
@@ -85,7 +85,7 @@
                 }
             }
             
-            $(this).val(tmpPassword.replace(/./g, '*'));
+            $(this).val(tmpPassword.replace(/./g, settings.hiddingChar));
 
             if (settings.debugMode) {
                 console.log('Current keyup position: ' + currKeyupPos);
@@ -208,6 +208,7 @@
         textToPassword: true,
         randomizeInputName: true,
         passwordField: '',
+        hiddingChar: '●',
         html5FormValidate: false,
         submitButton: '',
         callback: function() {
