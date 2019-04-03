@@ -5,7 +5,7 @@
  * @license MIT
  * @version 1.2.8
  * @author  Terry, https://github.com/terrylinooo/
- * @updated 2018-11-20
+ * @updated 2019-04-03
  * @link    https://github.com/terrylinooo/jquery.disableAutoFill
  */
 
