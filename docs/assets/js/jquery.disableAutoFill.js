@@ -3,7 +3,7 @@
  * The easiest solution for disabling Google Chrome auto-fill, auto-complete functions.
  *
  * @license MIT
- * @version 1.2.7-beta
+ * @version 1.2.8
  * @author  Terry, https://github.com/terrylinooo/
  * @updated 2018-11-20
  * @link    https://github.com/terrylinooo/jquery.disableAutoFill
@@ -64,7 +64,7 @@
             var currKeyupPos = this.selectionStart;
 
             for (var i = 0; i < passwordLen; i++) {
-                if (tmpPassword[i] !== '*') {
+                if (tmpPassword[i] !== settings.hidingChar) {
                     realPassword[i] = tmpPassword[i];
                 }
             }
@@ -85,7 +85,7 @@
                 }
             }
             
-            $(this).val(tmpPassword.replace(/./g, '*'));
+            $(this).val(tmpPassword.replace(/./g, settings.hidingChar));
 
             if (settings.debugMode) {
                 console.log('Current keyup position: ' + currKeyupPos);
@@ -170,7 +170,8 @@
         obj.find(settings.passwordField).each(function (i) {
             $(this).val(realPasswordMapper[this.id].join(''));
         });      
-
+       
+       
     };
 
     /**
@@ -199,7 +200,7 @@
         }
         _helper.passwordListener(this, settings);
         _helper.formSubmitListener(this, settings);
-
+        
     };
 
     $.fn.disableAutoFill.defaults = {
@@ -207,6 +208,7 @@
         textToPassword: true,
         randomizeInputName: true,
         passwordField: '',
+        hidingChar: '●',
         html5FormValidate: false,
         submitButton: '',
         callback: function() {

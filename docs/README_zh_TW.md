@@ -2,7 +2,7 @@
 
 針對 Google Chrome 瀏覽器的自動填入、自動完成功能，此 jQuery plugin 應該是最簡單禁用的解決方案。
 
-Document Transations: [English](./README.md) | [繁體中文](./README_zh_TW.md) | [简体中文](./README_zh_CN.md)
+Document Transations: [English](../README.md) | [繁體中文](./README_zh_TW.md) | [简体中文](./README_zh_CN.md)
 
 ----
 
@@ -58,6 +58,7 @@ option | default | note
 ---- | --- | ---
 passwordField | - | DOM 元素用 ID 或使用 ClassName 指定, 如果沒有設定, disableAutoFill 會自動找尋 [**type=password**] 的欄位。
 submitButton | - | DOM 元素用 ID 或使用 ClassName 指定, 如果沒有設定, disableAutoFill 會自動找尋 [**type=submit**] 按紐。
+hidingChar | ● | 隱藏密碼的替代字元。
 debugMode | false | 設為 true 的話會在 console.log 印訊息。
 randomizeInputName | true | 會自動把 <i><strong>input name attribute</strong></i> 以隨機的字串取代。然後在提交表單時復原至原始的欄位名稱，這麼做是避免 Google Chrome 和其它第三方拓展及其它瀏覽器會記住曾輸入的訊息。
 html5FormValidate | false | 設這個選項為 "true" 來啟用 HTML 5 原生的表單驗證功能 ( `required`,`pattern` 及其它相關屬性...)
