@@ -42,7 +42,9 @@
             obj.find('[type=password]').attr('type', 'text').addClass('disabledAutoFillPassword');
         }
 
-        obj.on('keyup', passObj, function () {
+        // Keydown will effectively capture a keypress held down on repeated fires
+        // This behavior stops on Keyup - so those events below can remain.
+        obj.on('keydown', passObj, function () {
 
             if (!this.id) {
                 this.id = Math.random().toString(36).substring(5);
@@ -75,7 +77,7 @@
                 var key = event.keyCode || event.charCode;
 
                 // Check if last keypress was backspace or delete
-                if (key == 8 || key == 46) {
+                if (key === 8 || key === 46) {
                     realPassword.splice(currKeyupPos, diff);
                 }
                 // User highlighted and overwrote a portion of the password
@@ -94,7 +96,7 @@
                 console.log(realPassword);
             }
         });
-    }
+    };
 
     /**
      * Helper function - formSubmitListener
@@ -104,7 +106,7 @@
      * @param {object} settings plugin settings.
      */
     _helper.formSubmitListener = function(obj, settings) {
-        var btnObj = (settings.submitButton == '') ? '.disableAutoFillSubmit' : settings.submitButton;
+        var btnObj = (settings.submitButton === '') ? '.disableAutoFillSubmit' : settings.submitButton;
 
         obj.on('click', btnObj, function(event) {
             _helper.restoreInput(obj, settings);
@@ -191,7 +193,7 @@
             this.find('[type=submit]').addClass('disableAutoFillSubmit').attr('type', 'button');
         }
 
-        if (settings.submitButton != '') {
+        if (settings.submitButton !== '') {
             this.find(settings.submitButton).addClass('disableAutoFillSubmit').attr('type', 'button');
         }
 
