@@ -18,17 +18,19 @@ Document Transations: [English](../README.md) | [繁體中文](./README_zh_TW.md
 
 ### 安装
 
+#### Npm
+```
+npm install disableautofill
+```
+
+#### Bower
 ```
 bower install jquery.disableAutoFill
 ```
-```
-<script src="/[your_bower_path]/jquery.disableAutoFill/src/jquery.disableAutoFill.min.js"></script>
-```
 
-或直接使用
-
+#### CDN
 ```
-<script src="https://terrylinooo.github.io/jquery.disableAutoFill/assets/js/jquery.disableAutoFill.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/disableautofill/src/jquery.disableAutoFill.min.js"></script>
 ```
 
 ### 线上范例
