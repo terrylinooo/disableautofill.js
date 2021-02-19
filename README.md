@@ -1,82 +1,91 @@
-# jquery.disableAutoFill
+# disableautofill.js
+
 The easiest solution for disabling Google Chrome auto-fill, auto-complete functions.
 
-Document Transations: [English](./README.md) | [繁體中文](./docs/README_zh_TW.md) | [简体中文](./docs/README_zh_CN.md)
+This library does the following steps:
 
-----
-
-I've spent serveral hours surfing online to look for solutions in order to disable Google Chrome auto-fill, auto-complate functions such as the screenshot below. 
-
-![Image](https://i.imgur.com/j5Mw1ly.png)
-
-After having tried all possible solutions I can find on Stackoverflow, howerver, they are outdated and not working. Finally I figured out that Google Chrome forces dropping the submission history while a form contains `type="password"` field, so this plugin is to do the following steps:
-
-- Replace `type="password"` to `type="text"` and then replace the text with asterisks.
+- Replace `type="password"` with `type="text"`.
+    It is recommended to use `type="text"` directly, or it might not work depends on browser's version and page rendering speeed.
+- Replace the text of password with asterisk symbols.
 - Add an attribute `autocomplete="off"` on form.
-- Randomize the input `name` value to prevent Chrome or other third-party extensions to remember what you filled.
+- Randomize the value of the attribut `name` in order to prevent Chrome to remember what you filled.
 
-### Install
+## Install
 
-#### Npm
-```
+### NPM
+```bash
 npm install disableautofill
 ```
 
 #### Bower
-```
-bower install jquery.disableAutoFill
-```
-
-#### CDN
-```
-<script src="https://cdn.jsdelivr.net/npm/disableautofill/src/jquery.disableAutoFill.min.js"></script>
+```bash
+bower install disableautofill
 ```
 
-### Demo
-
-- [Login Form](https://terrylinooo.github.io/jquery.disableAutoFill/)
-- [Login Form & jQuery Validate plugin](https://terrylinooo.github.io/jquery.disableAutoFill/jquery-validate.html)
-- [Login Form & HTML 5 native form validation](https://terrylinooo.github.io/jquery.disableAutoFill/html5-form-validate.html)
-
-Check out the demo page to see how it works.
-
-### Usage
+## Usage
 
 HTML
 ```html
 <form id="login-form">
+    ...
+</form>
 ```
 
 JS
 ```javascript
-$('#login-form').disableAutoFill();
+var daf = new disableautofill({...});
+
+daf.init();
 ```
 
-### Options
-
-option | default | note 
----- | --- | ---
-passwordField | - | Dom Element by ID or by ClassName, if not set, disableAutoFill will automaticlly pick up the [**type=password**] field.
-submitButton | - | Dom Element by ID or by ClassName, if not set, disableAutoFill will automaticlly pick up the [**type=submit**] button.
-hidingChar | ● | Character use to hide real password value.
-debugMode | false | If true, printing form serialized data in console log instead of submitting.
-randomizeInputName | true | This plugin will randomize <i><strong>input name attribute</strong></i> by default. It will restore back to original field name when submitting form. This is for preventing auto completion for all browsers (includes third-party auto-completeion extensions) not just for Google Chrome.
-html5FormValidate | false | Set this option to "true" to enable HTML 5 native form validate ( `required`,`pattern` etc...)
-callback | - | To validate form fields or something you can do.
-
-### Example
-
+Or, if you like to use jQuery plugin.
 ```javascript
-$('#login-form').disableAutoFill({
-    passwordField: '.password',
-    callback: function() {
-        return checkForm();
-    }
-});
+$('#login-form').disableAutoFill({...});
+```
 
+## Options
+
+option | default | type | note 
+---- | --- | --- | ---
+form | null | string | The id or class of the form. For example: `#my-form`, `.custom-form`. This option is ignored if using jQuery plugin..
+fields | [] | array | The id or class of the form. For example: `['.newpass', 'newpass2']`
+asterisk | ● | string | Character use to hide the real password value.
+debug | false | bool | Print colorful message in browser's development console.
+callback | null | function | To validate form fields or something you can do.
+
+## Examples
+
+This example form presents the main functionality of disableautofill.js
+A HTML form and a JavaScript function that is a form validator.
+
+```html
+<form id="testForm" method="get" action="/">
+    <div class="input-group">
+        <label>Username</label>
+        <input type="text" name="username">
+    </div>
+    <div class="input-group">
+        <label>Password</label>
+        <input type="text" name="password" class="test-pass">
+    </div>
+    <div class="input-group">
+        <label>Confirm password</label>
+        <input type="text" name="confirm_password" class="test-pass2">
+    </div>
+    <div class="button-section">
+        <button type="submit">Submit</button>
+    </div>
+</form>
+<script>
+
+/**
+ * Callback function is usually a form validator.
+ *
+ * @return bool
+ */
 function checkForm() {
     form = document.getElementById('login-form');
-    if (form.password.value == '') {
+    if (form.password.value == '' || form.confirm_password.value == '') {
         alert('Cannot leave Password field blank.');
         form.password.focus();
         return false;
@@ -88,35 +97,76 @@ function checkForm() {
     }
     return true;
 }
+</script>
 ```
 
-### Suggestion
+### JS
 
-This plugin may not work while the javascript render speed is slow. 
-Chrome detects the **type="password"** and still assign the "remember me" to the form elements.
-
-You can modify the input type="password" to "text", and add a class (for example: ".password")
-
-```html
-<input type="text" name="password" class="password">
-```
 ```javascript
-$(function() {
-    $('.login-form').disableAutoFill({
-        passwordField: '.password'
-    });
+ var daf = new disableautofill({
+    'form': '#testForm',
+    'fields': ['.test-pass', '.test-pass2'],
+    'debug': true,
+    'callback': function() {
+        return checkForm();
+    }
+});
+
+daf.init();
+```
+
+### jQuery
+
+JavaScript
+```javascript
+$('#test-form').disableAutoFill({
+    'fields': [
+        '.test-pass', // password
+        '.test-pass2' // confirm password
+    ],
+    'debug': true
+    'callback': function() {
+        return checkForm();
+    }
 });
 ```
-https://jsfiddle.net/terrylinooo/hhgzbsvy/
 
-### License
+## Development
+
+If you would like to contribute code to this project.
+
+```bash
+# Clone project.
+git clone git@github.com:terrylinooo/jquery.disableAutoFill.git your-branch-name
+
+# Get into the `your-branch-name` directory, run:
+npm install
+
+# Run a develpment web server, listen to port: `8000`
+npm run start
+```
+
+### Test pages
+
+```bash
+http://127.0.0.1:8000
+
+# This page is for jQuery plugin.
+http://127.0.0.1:8000/jquery
+```
+
+![](https://i.imgur.com/3xxfL3b.png)
+
+A test page will be showed and you can modify the code and see the results in real time.
+
+![](https://i.imgur.com/CAgyQf6.png)
+
+The Debugging messages will be showed in the development console.
+
+## License
 
 MIT
 
-### Authors
+## Authors
 
-* <a href="https://en.dictpedia.org">Terry Lin</a> (terrylinooo)
-
-
-
-
+disableautofill.js is brought to you by <a href="https://terryl.in">Terry Lin</a> from Taiwan.

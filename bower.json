@@ -1,0 +1,16 @@
+{
+    "name": "disableautofill",
+    "version": "1.0.0",
+    "main": "./dist/disableautofill.min.js",
+    "dependencies": {},
+    "ignore": [
+        "src/",
+        "dev/",
+        "node_modules/",
+        ".gitignore",
+        ".npmignore",
+        "package.json",
+        "package-lock.json",
+        "webpack.config.js"
+    ]
+}

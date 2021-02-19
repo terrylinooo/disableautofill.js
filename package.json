@@ -1,13 +1,13 @@
+
+
 {
   "name": "disableautofill",
   "description": "The easiest solution for disabling Google Chrome auto-fill, auto-complete functions.",
-  "version": "1.2.8",
+  "version": "2.0.0",
   "author": "Terry Lin <contact@terryl.in> (https://terryl.in)",
-  "license": "MIT",
-  "main": "src/jquery.disableAutoFill.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/terrylinooo/jquery.disableAutoFill.git"
+    "url": "https://terrylinooo.github.io/jquery.disableAutoFill/"
   },
   "bugs": {
     "url": "https://github.com/terrylinooo/jquery.disableAutoFill/issues"
@@ -15,16 +15,40 @@
   "bundleDependencies": [],
   "homepage": "https://terrylinooo.github.io/jquery.disableAutoFill/",
   "keywords": [
-    "jquery",
-    "chrome",
-    "autofill"
+    "disableautofill",
+    "client",
+    "script"
   ],
-  "directories": {
-    "doc": "docs"
+  "main": "./index",
+  "private": false,
+  "engines": {
+      "node": ">=4.0.0"
+  },
+  "devDependencies": {
+      "ejs": "^3.1.6",
+      "eslint": "^7.20.0",
+      "eslint-config-defaults": "^9.0.0",
+      "express": "^4.17.1",
+      "jquery": "^3.5.1",
+      "pre-commit": "^1.2.2",
+      "webpack": "^5.22.0",
+      "webpack-cli": "^4.5.0",
+      "webpack-dev-middleware": "^4.1.0",
+      "webpack-hot-middleware": "^2.25.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+      "init": "git submodule init && git submodule update && git submodule status",
+      "start": "node dev/server.js --dev-server",
+      "lint": "eslint src",
+      "build-unminified": "webpack --env env=production --config webpack.config.js --progress",
+      "build-minified": "webpack --env env=production --env minified=yes --config webpack.config.js --progress",
+      "build": "npm run build-unminified && npm run build-minified",
+      "test": "npm run lint"
   },
+  "pre-commit": [
+      "lint"
+  ],
+  "license": "MIT",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
   }
