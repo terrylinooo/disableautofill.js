@@ -6,14 +6,14 @@
   "version": "2.0.0",
   "author": "Terry Lin <contact@terryl.in> (https://terryl.in)",
   "repository": {
-    "type": "git",
-    "url": "https://terrylinooo.github.io/jquery.disableAutoFill/"
+    "type": "git", 
+    "url": "git+https://github.com/terrylinooo/disableautofill.js.git"
   },
   "bugs": {
-    "url": "https://github.com/terrylinooo/jquery.disableAutoFill/issues"
+    "url": "https://github.com/terrylinooo/disableautofill.js/issues"
   },
   "bundleDependencies": [],
-  "homepage": "https://terrylinooo.github.io/jquery.disableAutoFill/",
+  "homepage": "https://github.com/terrylinooo/disableautofill.js",
   "keywords": [
     "disableautofill",
     "client",
@@ -50,6 +50,6 @@
   ],
   "license": "MIT",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://npm.pkg.github.com"  
   }
 }
