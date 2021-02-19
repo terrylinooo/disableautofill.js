@@ -24,8 +24,12 @@ bower install terrylinooo/disableautofill.js
 
 #### CDN
 
-```html
+```bash
+# Pure JS, without jQuery
 https://cdn.jsdelivr.net/npm/disableautofill@2.0.0/dist/disableautofill.min.js
+
+# jQuery plugin.
+https://cdn.jsdelivr.net/npm/disableautofill@2.0.0/dist/jquery.disableautofill.min.js
 ```
 
 ## Usage
