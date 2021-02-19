@@ -11,8 +11,6 @@ var tempName = {};
  * @param {array}  originalValue The original password.
  */
 function randomizer(object, originalValue) {
-   
-
     let _instance = {};
 
     let obj = object;

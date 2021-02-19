@@ -4,11 +4,14 @@ The easiest solution for disabling Google Chrome auto-fill, auto-complete functi
 
 This library does the following steps:
 
-- Replace `type="password"` with `type="text"`.
-    It is recommended to use `type="text"` directly, or it might not work depends on browser's version and page rendering speeed.
-- Replace the text of password with asterisk symbols.
-- Add an attribute `autocomplete="off"` on form.
-- Randomize the value of the attribut `name` in order to prevent Chrome to remember what you filled.
+* Replace `type="password"` with `type="text"`. [1]
+* Replace the text of password with asterisk symbols.
+* Add an attribute `autocomplete="off"` on form.
+* Randomize the attribute `name` in order to prevent Google Chrome to remember what you filled.
+
+Note:
+
+[1] *It is recommended to use `type="text"` directly, or it might not work depends on browser's version and page rendering speed.*
 
 ## Install
 
@@ -127,7 +130,7 @@ daf.init();
 
 ### jQuery
 
-JavaScript
+
 ```javascript
 $('#test-form').disableAutoFill({
     'fields': [
