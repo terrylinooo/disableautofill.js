@@ -38,3 +38,11 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 #-------------------------
 
 !.gitignore
+
+node_modules
+node_modules/**/*
+bin
+reports
+reports/**/*
+package-lock.json
+yarn.lock
