@@ -19,7 +19,13 @@ npm install disableautofill
 
 #### Bower
 ```bash
-bower install disableautofill
+bower install terrylinooo/disableautofill.js
+```
+
+#### CDN
+
+```html
+https://cdn.jsdelivr.net/npm/disableautofill@2.0.0/dist/disableautofill.min.js
 ```
 
 ## Usage

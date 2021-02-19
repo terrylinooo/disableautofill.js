@@ -7,7 +7,7 @@
   "author": "Terry Lin <contact@terryl.in> (https://terryl.in)",
   "repository": {
     "type": "git", 
-    "url": "git+https://github.com/terrylinooo/disableautofill.js.git"
+    "url": "https://github.com/terrylinooo/disableautofill.js.git"
   },
   "bugs": {
     "url": "https://github.com/terrylinooo/disableautofill.js/issues"
@@ -50,6 +50,6 @@
   ],
   "license": "MIT",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"  
+    "registry": "https://registry.npmjs.org"  
   }
 }
