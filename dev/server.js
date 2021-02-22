@@ -18,29 +18,29 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
 app.use(require('webpack-dev-middleware')(compiler, {
-	publicPath: config.output.publicPath
+    publicPath: config.output.publicPath
 }));
 
 app.use(require('webpack-hot-middleware')(compiler));
 
 app.get('/', function (req, res) {
-	let results = JSON.stringify(req.query, null, 4);
-	res.render(path.join(__dirname, 'index.ejs'), {
+    let results = JSON.stringify(req.query, null, 4);
+    res.render(path.join(__dirname, 'index.ejs'), {
         results: results
     });
 });
 
 app.get('/jquery', function (req, res) {
-	let results = JSON.stringify(req.query, null, 4);
-	res.render(path.join(__dirname, 'index.jquery.ejs'), {
+    let results = JSON.stringify(req.query, null, 4);
+    res.render(path.join(__dirname, 'index.jquery.ejs'), {
         results: results
     });
 });
 
 app.listen(port, '0.0.0.0', function (err) {
-	if (err) {
-		console.log(err);
-		return;
-	}
-	console.log('Listening at http://0.0.0.0:%s', port);
+    if (err) {
+        console.log(err);
+        return;
+    }
+    console.log('Listening at http://0.0.0.0:%s', port);
 });
