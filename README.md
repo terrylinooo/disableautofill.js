@@ -46,14 +46,19 @@ HTML
 
 JS
 ```javascript
-var daf = new disableautofill({...});
+var daf = new disableautofill({
+    'form': '#login-form',
+    // settings...
+});
 
 daf.init();
 ```
 
 Or, if you like to use jQuery plugin.
 ```javascript
-$('#login-form').disableAutoFill({...});
+$('#login-form').disableAutoFill({
+    // settings...
+});
 ```
 
 ## Options
@@ -118,7 +123,10 @@ function checkForm() {
 ```javascript
  var daf = new disableautofill({
     'form': '#testForm',
-    'fields': ['.test-pass', '.test-pass2'],
+    'fields': [
+        '.test-pass',  // password
+        '.test-pass2'  // confirm password
+    ],
     'debug': true,
     'callback': function() {
         return checkForm();

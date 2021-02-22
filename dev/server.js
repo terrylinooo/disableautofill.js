@@ -23,7 +23,6 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use(require('webpack-hot-middleware')(compiler));
 
-
 app.get('/', function (req, res) {
 	let results = JSON.stringify(req.query, null, 4);
 	res.render(path.join(__dirname, 'index.ejs'), {

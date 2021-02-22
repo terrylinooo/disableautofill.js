@@ -1,13 +1,6 @@
-example
-imgs
-site
-release
-bin
-releasenotes.md
+demo
+dev
 webpack.config.js
-index.html
-devserver.js
-bower.json
 .eslintignore
 .eslintrc
 .gitmodules

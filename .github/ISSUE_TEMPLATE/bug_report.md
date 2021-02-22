@@ -4,7 +4,6 @@ about: Create a report to help us improve
 labels: 
 
 ---
-
 Please disable all extensions in your browser, and then try again. If the issues still happen, provide the information below:
 
 **Describe the bug**
@@ -21,3 +20,4 @@ A clear and concise description of what the bug is.
 **Additional context**
 
 Add any other context about the problem here.
+
