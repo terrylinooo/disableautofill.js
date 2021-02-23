@@ -1,5 +1,7 @@
 # disableautofill.js
 
+![Disable auto-fill, auto-complete functions](https://i.imgur.com/MvWi2Sr.png)
+
 The easiest solution for disabling Google Chrome auto-fill, auto-complete functions.
 
 This library does the following steps:
@@ -15,7 +17,7 @@ Note:
 
 ## Install
 
-### NPM
+#### NPM
 ```bash
 npm install disableautofill
 ```
@@ -66,7 +68,7 @@ $('#login-form').disableAutoFill({
 option | default | type | note 
 ---- | --- | --- | ---
 form | null | string | The id or class of the form. For example: `#my-form`, `.custom-form`. This option is ignored if using jQuery plugin..
-fields | [] | array | The id or class of the form. For example: `['.newpass', 'newpass2']`
+fields | [] | array | The id or class of the fields (the `input` elements for filling password in the form). For example: `['.newpass', 'newpass2']`
 asterisk | ● | string | Character use to hide the real password value.
 debug | false | bool | Print colorful message in browser's development console.
 callback | null | function | To validate form fields or something you can do.
