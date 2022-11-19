@@ -1,11 +1,10 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Demo page</title>
+    <title>Example page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
 
         input {
@@ -79,18 +78,18 @@
 <fieldset>
     <legend>Test</legend>
     <div>
-        <form id="testForm" method="get" action="/jquery">
+        <form id="testForm" method="get" action="/">
             <div class="input-group">
                 <label>Username</label>
                 <input type="text" name="username">
             </div>
             <div class="input-group">
                 <label>Password</label>
-                <input type="text" name="password" class="test-pass">
+                <input type="password" name="password" class="test-pass">
             </div>
             <div class="input-group">
                 <label>Confirm password</label>
-                <input type="text" name="confirm_password" class="test-pass2">
+                <input type="password" name="confirm_password" class="test-pass2">
             </div>
             <div class="button-section">
                 <button type="submit">Submit</button>
@@ -100,20 +99,40 @@
 </fieldset>
 <fieldset>
     <legend>Result</legend>
-    <textarea class="print-code"><%= results %></textarea>
+    <textarea class="print-code"></textarea>
 </fieldset>
 
-<script src="/dist/jquery.disableautofill.js"></script>
+<script src="../dist/disableautofill.js"></script>
 <script>
-
-    $('#testForm').disableAutoFill({
-        'fields': [
+    const daf = new Disableautofill('#testForm', {
+        fields: [
             '.test-pass',
             '.test-pass2'
         ],
-        'debug': true
+        callback: (form) => {
+            const password1 = form.querySelector('.test-pass').value;
+            const password2 = form.querySelector('.test-pass2').value;
+            const results = `password 1: ${password1}\npassword 2: ${password2}`;
+            document.querySelector('.print-code').innerHTML = results;
+            console.log(results);
+
+            // Return true to perform form submission.
+            return false;
+        },
     });
 
+    const field1 = document.querySelector('.test-pass');
+    const field2 = document.querySelector('.test-pass2');
+
+    field1.addEventListener('keyup', () => {
+        const results = `password 1: ${field1.value}\npassword 2: ${field2.value}`;
+        document.querySelector('.print-code').innerHTML = results;
+    });
+
+    field2.addEventListener('keyup', () => {
+        const results = `password 1: ${field1.value}\npassword 2: ${field2.value}`;
+        document.querySelector('.print-code').innerHTML = results;
+    });
 
 </script>
 </body>

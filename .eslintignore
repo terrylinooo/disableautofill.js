@@ -1,6 +1,5 @@
+.github
 .vscode
 node_modules
-playground
 coverage
-demo
-dev
+dist
