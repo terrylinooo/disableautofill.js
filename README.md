@@ -2,6 +2,8 @@
 
 ![Disable auto-fill, auto-complete functions](https://i.imgur.com/MvWi2Sr.png)
 
+![Test](https://github.com/terrylinooo/disableautofill.js/actions/workflows/testing.yml/badge.svg) [![codecov](https://codecov.io/gh/terrylinooo/disableautofill.js/branch/master/graph/badge.svg?token=lIP1cwSQjC)](https://codecov.io/gh/terrylinooo/disableautofill.js) [![DeepScan grade](https://deepscan.io/api/teams/19398/projects/23075/branches/688836/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=19398&pid=23075&bid=688836)
+
 The easiest solution for disabling Google Chrome auto-fill, auto-complete functions.
 
 This library does the following steps:
