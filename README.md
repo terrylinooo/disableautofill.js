@@ -25,7 +25,7 @@ npm install disableautofill
 #### CDN
 
 ```bash
-https://cdn.jsdelivr.net/npm/disableautofill@3.0.0/dist/disableautofill.min.js
+https://cdn.jsdelivr.net/npm/disableautofill@3.0.1/dist/disableautofill.min.js
 
 ```
 
@@ -50,7 +50,6 @@ var daf = new Disableautofill('#login-form', {
 daf.destory();
 ```
 
-
 ## Options
 
 option | default | type | note 
@@ -62,7 +61,6 @@ callback | null | function | To validate form fields or something you can do.
 ## Examples
 
 This example form presents the main functionality of disableautofill.js
-A HTML form and a JavaScript function that is a form validator.
 
 ```html
 <form id="testForm" method="get" action="/">
