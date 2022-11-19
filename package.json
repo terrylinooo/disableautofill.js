@@ -11,11 +11,12 @@
     "coverage": "npm test -- --coverage"
   },
   "jest": {
-    "testEnvironment": "jsdom"
+    "testEnvironment": "jsdom",
+    "collectCoverageFrom": ["./src/**"]
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/terrylinooo/sliderm.js.git"
+    "url": "git+https://github.com/terrylinooo/disableautofill.js.git"
   },
   "keywords": [
     "disable-autofill",
