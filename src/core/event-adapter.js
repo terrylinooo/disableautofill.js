@@ -3,7 +3,8 @@
  * So we are able to make references on the events we created,
  * and remove them completely when we don't need them.
  *
- * Source: https://github.com/terrylinooo/sliderm.js/blob/master/src/core/events/event-adapter.js
+ * Source:
+ * https://github.com/terrylinooo/sliderm.js/blob/master/src/core/events/event-adapter.js
  */
 export default class EventAdapter {
   /**

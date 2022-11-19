@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Demo page</title>
+    <title>Example page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -85,11 +85,11 @@
             </div>
             <div class="input-group">
                 <label>Password</label>
-                <input type="text" name="password" class="test-pass">
+                <input type="password" name="password" class="test-pass">
             </div>
             <div class="input-group">
                 <label>Confirm password</label>
-                <input type="text" name="confirm_password" class="test-pass2">
+                <input type="password" name="confirm_password" class="test-pass2">
             </div>
             <div class="button-section">
                 <button type="submit">Submit</button>
@@ -115,11 +115,11 @@
             const results = `password 1: ${password1}\npassword 2: ${password2}`;
             document.querySelector('.print-code').innerHTML = results;
             console.log(results);
+
+            // Return true to perform form submission.
             return false;
         },
     });
-
-    daf.init();
 
 </script>
 </body>

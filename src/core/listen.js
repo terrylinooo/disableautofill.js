@@ -1,30 +1,23 @@
 import handler from './handle';
-import EventAdapter from './event-adapter';
-
 /**
  * Event listener for password fields.
  * We'd like to hide the original password string with symbol characters.
  *
- * @param {string} selector The form's .class or #id
- * @param {array} fields A collecition of the DOMs' .class or #id
- * @param {string} asterisk The asterisk symbol. (option)
- * @param {function} callback Generally the form validator.
+ * @param {Object} main The main instance.
  */
-export default function listen(selector, fields, asterisk, callback) {
-  const form = document.querySelector(selector);
-
-  if (!form) {
-    return;
-  }
-
-  const event = new EventAdapter(form);
+export default function listen(main) {
+  const { form } = main;
+  const { event } = main;
+  const { fields } = main.setting;
+  const { asterisk } = main.setting;
+  const { callback } = main.setting;
 
   event.on('keyup', (e) => {
-    fields.forEach((field, i) => {
-      const fieldDom = {};
-      fieldDom[i] = document.querySelector(field);
-      if (fieldDom[i]) {
-        handler(fieldDom[i], e, asterisk, 'randomize');
+    fields.forEach((field) => {
+      const fieldDom = document.querySelector(field);
+      if (fieldDom) {
+        handler(fieldDom, e, asterisk, 'randomize');
+        fieldDom.setAttribute('type', 'text');
       }
     });
   });
@@ -32,16 +25,17 @@ export default function listen(selector, fields, asterisk, callback) {
   event.on('submit', (e) => {
     e.preventDefault();
 
-    const restorePassword = new Promise((resolve, reject) => {
-      fields.forEach((field, i) => {
-        const fieldDom = {};
-        fieldDom[i] = document.querySelector(field);
-        if (fieldDom[i]) {
-          handler(fieldDom[i], e, asterisk, 'restore');
-          return resolve();
+    const restorePassword = new Promise((resolve) => {
+      for (let i = 0; i < fields.length; i += 1) {
+        const fieldDom = document.querySelector(fields[i]);
+        if (fieldDom) {
+          handler(fieldDom, e, asterisk, 'restore');
+          if (fieldDom.getAttribute('data-original-type') === 'password') {
+            fieldDom.setAttribute('type', 'password');
+          }
         }
-        return reject();
-      });
+      }
+      resolve();
     });
 
     restorePassword.then(() => {

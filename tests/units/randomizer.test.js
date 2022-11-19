@@ -1,8 +1,10 @@
 import Randomizer from '../../src/core/randomizer';
+import { initializeState } from '../../src/core/states';
 import loginForm from '../fixtures/login-form';
 
 describe('Unit testing for handler...', () => {
   beforeEach(() => {
+    initializeState();
     document.body.innerHTML = loginForm();
   });
 
