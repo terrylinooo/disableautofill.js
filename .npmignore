@@ -1,6 +1,8 @@
-demo
-dev
-webpack.config.js
-.eslintignore
-.eslintrc
-.gitmodules
+.git
+.github
+.vscode
+.gitignore
+node_modules
+playground
+coverage
+package-lock.json
