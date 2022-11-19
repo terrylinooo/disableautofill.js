@@ -104,7 +104,7 @@
 
 <script src="../dist/disableautofill.js"></script>
 <script>
-    var daf = new Disableautofill('#testForm', {
+    const daf = new Disableautofill('#testForm', {
         fields: [
             '.test-pass',
             '.test-pass2'
@@ -119,6 +119,19 @@
             // Return true to perform form submission.
             return false;
         },
+    });
+
+    const field1 = document.querySelector('.test-pass');
+    const field2 = document.querySelector('.test-pass2');
+
+    field1.addEventListener('keyup', () => {
+        const results = `password 1: ${field1.value}\npassword 2: ${field2.value}`;
+        document.querySelector('.print-code').innerHTML = results;
+    });
+
+    field2.addEventListener('keyup', () => {
+        const results = `password 1: ${field1.value}\npassword 2: ${field2.value}`;
+        document.querySelector('.print-code').innerHTML = results;
     });
 
 </script>
