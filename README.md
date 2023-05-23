@@ -91,12 +91,12 @@ This example form presents the main functionality of disableautofill.js
  */
 function checkForm() {
     form = document.getElementById('login-form');
-    if (form.password.value == '' || form.confirm_password.value == '') {
+    if (form.password.value === '' || form.confirm_password.value === '') {
         alert('Cannot leave Password field blank.');
         form.password.focus();
         return false;
     }
-    if (form.username.value == '') {
+    if (form.username.value === '') {
         alert('Cannot leave User Id field blank.');
         form.username.focus();
         return false;
@@ -121,10 +121,6 @@ new Disableautofill('#testForm', {
 
 ```
 
-## License
+## About
 
-MIT
-
-## Authors
-
-disableautofill.js is brought to you by <a href="https://terryl.in">Terry Lin</a> from Taiwan.
+disableautofill.js is developed by Terry Lin, a software developer from [Terry Lin](https://terryl.in). Special thanks to Jimmy from [CoLocal](https://colocal.com) for sponsoring the development of this script. It is released under the **MIT license**, allowing for free and open use.
