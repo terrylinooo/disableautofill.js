@@ -9,7 +9,7 @@ export default defineConfig({
     setupFiles: [resolve(__dirname, 'vitest.setup.ts')],
     coverage: {
       provider: 'v8',
-      reporter: ['text', 'html'],
+      reporter: ['text', 'html', 'json'],
     },
   },
 });
