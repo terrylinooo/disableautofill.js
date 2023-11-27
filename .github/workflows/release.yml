@@ -44,13 +44,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Commit and push
-      run: |
-        git config --global user.name 'GitHub Action'
-        git config --global user.email 'github-action-bot@github.com'
-        git commit -am "Update version to ${{ github.event.release.tag_name }}"
-        git push
-
     - name: Publish to npm
       run: npm publish
       env:
