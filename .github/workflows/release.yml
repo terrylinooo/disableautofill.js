@@ -26,27 +26,19 @@ jobs:
     - name: Build
       run: npm run build
 
-    - name: Archive production artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: dist
-        path: dist/
-
-    - name: Archive production artifacts
-      run: zip -r dist.zip dist/
-      
-    - name: Upload dist to Release
-      uses: softprops/action-gh-release@v1
-      with:
-        files: dist/*
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
     - name: Publish to npm
       run: npm publish
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-
+    - name: Archive production artifacts
+      run: zip -r dist.zip dist/
+        
+    - name: Upload dist to Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: dist.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
         
