@@ -26,5 +26,12 @@ jobs:
       run: npm install
     - name: Run tests and collect coverage
       run: npm run coverage
+    - name: List coverage directory
+      run: ls -l coverage/
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
+      with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: ./coverage/
+          verbose: true
+  
