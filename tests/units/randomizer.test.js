@@ -1,29 +1,34 @@
 import Randomizer from '../../src/core/randomizer';
-import { initializeState } from '../../src/core/states';
+import State from '../../src/core/state';
 import loginForm from '../fixtures/login-form';
 
-describe('Unit testing for handler...', () => {
+describe('Randomizer class', () => {
+  let passwordField;
+  let randomizer;
+  let state;
+
   beforeEach(() => {
-    initializeState();
     document.body.innerHTML = loginForm();
+    passwordField = document.querySelector('#password');
+    state = new State('1234');
+    randomizer = new Randomizer(passwordField, passwordField.value.split(''), state);
   });
 
-  test('Check the function - queue, wait for 2 seconds.', () => {
-    const passwordField = document.querySelector('#password');
+  test('should randomize the name attribute of the password field', () => {
     const originalName = passwordField.name;
-    const originalValue = passwordField.value;
-
-    expect(originalName).toBe('password');
-    expect(originalValue).toBe('12345678');
-
-    const randomizer = new Randomizer(passwordField, originalValue.split(''));
 
     randomizer.randomize();
 
-    expect(passwordField.name === 'password').toBeFalsy();
+    expect(passwordField.name).not.toBe(originalName);
+    expect(passwordField.name).not.toBe('');
+  });
 
+  test('should restore the original name attribute of the password field', () => {
+    randomizer.randomize();
+    const randomizedName = passwordField.name;
     randomizer.restore();
 
-    expect(passwordField.name === 'password').toBeTruthy();
+    expect(passwordField.name).toBe('password');
+    expect(passwordField.name).not.toBe(randomizedName);
   });
 });

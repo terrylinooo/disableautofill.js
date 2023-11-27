@@ -1,3 +1,5 @@
+import { EventHandler } from '../types';
+
 /**
  * Implement the adapter pattern to the native DOM event methods.
  * So we are able to make references on the events we created,
@@ -7,66 +9,56 @@
  * https://github.com/terrylinooo/sliderm.js/blob/master/src/core/events/event-adapter.js
  */
 export default class EventAdapter {
+  private target: EventTarget;
+  private events: Record<string, EventHandler>;
+
   /**
    * Constructor.
-   *
-   * @param {EventTarget} target
    */
-  constructor(target) {
+  constructor(target: EventTarget) {
     this.target = target;
     this.events = {};
   }
 
   /**
-   * Add an event to a HTML element.
-   *
-   * @param {String} event
-   * @param {Function} handler
+   * Adds an event listener to the target element.
    */
-  on(event, handler) {
+  on(event: string, handler: EventHandler): void {
     this.events[event] = handler;
     this.target.addEventListener(event, this.events[event]);
   }
 
   /**
-   * Remove an event from a HTML element.
-   *
-   * @param {String} event
-   * @param {Function} handler
+   * Removes an event listener from the target element.
    */
-  off(event) {
+  off(event: string): void {
     this.target.removeEventListener(event, this.events[event]);
   }
 
   /**
-   * Dispatch an event on a HTML element.
-   *
-   * @param {String} event
+   * Dispatches an event on the target element.
    */
-  emit(event) {
+  emit(event: string): void {
     if (typeof this.events[event] !== 'undefined') {
       this.target.dispatchEvent(new Event(event));
     }
   }
 
   /**
-   * As you see, destory everything.
+   * Destroys all event listeners associated with the target element.
    */
-  destory() {
-    const events = Object.keys(this.events);
-    for (let i = 0; i < events.length; i += 1) {
-      this.off(events[i]);
-    }
-    delete this.events;
+  destroy(): void {
+    Object.keys(this.events).forEach(event => {
+      this.off(event);
+    });
+    this.events = {};
   }
 
   /**
-   * Mock to dispatch an event for current target.
-   *
-   * @param {String} event
-   * @param {Object} dispatchEvent
+   * Mocks the dispatch of an event for the current target.
+   * Mainly used for testing purposes.
    */
-  mock(event, dispatchEvent) {
+  mock(event: string, dispatchEvent: Event): void {
     if (typeof this.events[event] !== 'undefined') {
       this.events[event](dispatchEvent);
     }
