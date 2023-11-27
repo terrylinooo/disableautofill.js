@@ -24,13 +24,6 @@ Note:
 npm install disableautofill
 ```
 
-#### CDN
-
-```bash
-https://cdn.jsdelivr.net/npm/disableautofill@3.0.1/dist/disableautofill.min.js
-
-```
-
 ## Usage
 
 HTML
@@ -49,7 +42,7 @@ var daf = new Disableautofill('#login-form', {
 });
 
 // If you want to remove the attached events.
-daf.destory();
+daf.destroy();
 ```
 
 ## Options

@@ -2,7 +2,17 @@
 .github
 .vscode
 .gitignore
+.prettierrc
+.eslintrc
+.eslintignore
+tsconfig.json
+vite.config.ts
+vitest.config.ts
+vitest.setup.ts
+README.md
 node_modules
 playground
+tests
+example
 coverage
 package-lock.json

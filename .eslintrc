@@ -1,16 +1,24 @@
 {
   "env": {
     "browser": true,
-    "es2021": true,
-    "jest/globals": true
+    "es2022": true,
+    "node": true
   },
+  "root": true,
   "extends": [
+    "eslint:recommended",
     "plugin:react/recommended",
-    "airbnb"
+    "plugin:react/jsx-runtime",
+    "plugin:import/recommended",
+    "plugin:import/typescript",
+    "plugin:@typescript-eslint/recommended"
   ],
   "overrides": [
   ],
   "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
@@ -19,11 +27,31 @@
     "jsx-a11y",
     "import",
     "prettier",
-    "jest",
+    "@typescript-eslint"
   ],
   "rules": {
     "prettier/prettier": "error",
     "object-curly-newline": 0,
-    "operator-linebreak": 0
+    "operator-linebreak": 0,
+    "complexity": ["error", 10]
+  },
+  "parser": "@typescript-eslint/parser",
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          [
+            "@",
+            "./src"
+          ]
+        ],
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
+      }
+    }
   }
 }
