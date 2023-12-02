@@ -57,10 +57,12 @@ describe('Listen function', () => {
     passwordField.value = 'password';
     passwordField.dispatchEvent(keyupEvent);
 
-    formElement.dispatchEvent(new Event('submit', {
-      bubbles: true,
-      cancelable: true,
-    }));
+    formElement.dispatchEvent(
+      new Event('submit', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    );
 
     expect(mockSubmitHandler).toHaveBeenCalled();
     expect(passwordField.value).toBe('password');

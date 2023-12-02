@@ -1,5 +1,5 @@
 import EventAdapter from '../../src/core/event-adapter';
-import { describe, test, expect, beforeEach } from 'vitest';
+import { describe, test, expect, beforeEach, vi } from 'vitest';
 
 describe('EventAdapter class', () => {
   let eventAdapter;

@@ -4,6 +4,7 @@ import State from './core/state';
 export type EventHandler = (event: Event | KeyboardEvent) => void;
 
 export interface StateData {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }
 

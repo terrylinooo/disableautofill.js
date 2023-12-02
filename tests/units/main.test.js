@@ -24,4 +24,3 @@ describe('Main class', () => {
     console.error = originalConsoleError;
   });
 });
-

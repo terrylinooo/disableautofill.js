@@ -11,54 +11,52 @@ export const listen = (main: Main): void => {
   const { form, event, state, setting } = main;
   const { fields, asterisk, callback } = setting;
 
+  if (event === null) {
+    console.error('EventAdapter is not initialized.');
+    return;
+  }
+
   const submit = (form: HTMLFormElement): void => {
-    if ((window as any).disableautofill_unit_test) {
+    if ((window as Window & { disableautofill_unit_test?: boolean }).disableautofill_unit_test) {
       console.log('test ok, submitted.');
       return;
     }
     form.submit();
   };
 
-  if (event === null) {
-    console.error('EventAdapter is not initialized.')
-    return;
-  }
+  const keyupPasswordField = (e: Event | KeyboardEvent) => {
+    const fieldDom = e.target as HTMLInputElement | null;
+    if (fieldDom && fieldDom.getAttribute('data-orig-type') === 'password') {
+      handle({
+        fieldDom,
+        event: e,
+        asterisk,
+        action: 'randomize',
+        state,
+      });
+    }
+  };
 
-  event.on('keyup', (e: Event | KeyboardEvent) => {
-    fields.forEach((field: any) => {
+  const restorePasswordFieldNames = (e: Event) => {
+    fields.forEach((field: string) => {
       const fieldDom = document.querySelector(field) as HTMLInputElement | null;
-      if (fieldDom) {
+      if (fieldDom && fieldDom.getAttribute('data-orig-type') === 'password') {
         handle({
           fieldDom,
           event: e,
           asterisk,
-          action: 'randomize',
+          action: 'restore',
           state,
         });
-        fieldDom.setAttribute('type', 'text');
       }
     });
-  });
+  };
 
-  event.on('submit', (e: Event) => {
+  const submitForm = (e: Event) => {
     e.preventDefault();
 
     const restorePassword = new Promise<void>((resolve) => {
-      for (let i = 0; i < fields.length; i += 1) {
-        const fieldDom = document.querySelector(fields[i]) as HTMLInputElement | null;
-        if (fieldDom) {
-          handle({
-            fieldDom,
-            event: e,
-            asterisk,
-            action: 'restore',
-            state,
-          });
-          if (fieldDom.getAttribute('data-original-type') === 'password') {
-            fieldDom.setAttribute('type', 'password');
-          }
-        }
-      }
+      restorePasswordFieldNames(e);
       resolve();
     });
 
@@ -71,5 +69,9 @@ export const listen = (main: Main): void => {
       }
       submit(form);
     });
-  });
+  };
+
+  event.on('keyup', keyupPasswordField);
+  event.on('submit', submitForm);
+  event.on('restorePasswordName', restorePasswordFieldNames);
 };

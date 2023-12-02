@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Vite Dev server</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <style>
+
+    input {
+      height: 35px;
+      line-height: 35px;
+      font-size: 16px;
+      border: 1px #aaaaaa solid;
+      box-sizing: border-box;
+      vertical-align: middle;
+      padding: 0 15px;
+      -moz-border-radius: 2px;
+      -webkit-border-radius: 2px;	
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    button {
+      margin-left: 5px;
+      height: 35px;
+      padding: 0 10px;
+      line-height: 35px;
+      font-size: 16px;
+      border: 1px rgb(21, 112, 173) solid;
+      background-color: rgb(3, 139, 230);
+      color: #ffffff;
+      box-sizing: border-box;
+      vertical-align: middle;
+      -moz-border-radius: 2px;
+      -webkit-border-radius: 2px;	
+      border-radius: 2px;
+    }
+
+    fieldset {
+      border: 2px solid #dddddd;
+      -moz-border-radius: 8px;
+      -webkit-border-radius: 8px;	
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    label {
+      width: 200px;
+      display: inline-block;
+      overflow: hidden;
+      text-align: left;
+    }
+
+    .input-group {
+      padding: 10px;
+    }
+
+    .button-section {
+      display: block;
+      margin-top: 20px;
+      padding-top: 20px;
+    }
+
+    .print-code {
+      width: 80%;
+      height: 130px;
+      border: 1px #dddddd solid;
+      margin: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>disableautofill.js</h1>
+  <fieldset>
+    <legend>Test</legend>
+    <div>
+      <form id="testForm" method="get" action="/">
+        <div class="input-group">
+          <label>Username</label>
+          <input type="text" name="username">
+        </div>
+        <div class="input-group">
+          <label>Password</label>
+          <input type="password" name="password" class="test-pass">
+        </div>
+        <div class="input-group">
+          <label>Confirm password</label>
+          <input type="password" name="confirm_password" class="test-pass2">
+        </div>
+        <div class="button-section">
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+      <div>
+        <hr />
+        <button id="reload" type="button">Reload</button>
+        <button id="destory" type="button">Destroy</button>
+      </div>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Result</legend>
+    <textarea class="print-code"></textarea>
+  </fieldset>
+
+  <script type="module" src="/src/index.ts"></script>
+  <script>
+    let daf = null;
+    let exampleForm = null;
+    const init = () => {
+      console.log('[Disableautofill.js] dev code is running.');
+
+      daf = new Disableautofill('#testForm', {
+        fields: [
+            '.test-pass',
+            '.test-pass2'
+        ],
+        callback: (form) => {
+          const password1 = form.querySelector('.test-pass').value;
+          const password2 = form.querySelector('.test-pass2').value;
+          const results = `password 1: ${password1}\npassword 2: ${password2}`;
+          document.querySelector('.print-code').innerHTML = results;
+          console.log(results);
+          // Return true to perform form submission.
+          return false;
+        },
+      });
+
+      const field1 = document.querySelector('.test-pass');
+      const field2 = document.querySelector('.test-pass2');
+
+      field1.addEventListener('keyup', () => {
+        const results = `password 1: ${field1.value}\npassword 2: ${field2.value}`;
+        document.querySelector('.print-code').innerHTML = results;
+      });
+
+      field2.addEventListener('keyup', () => {
+        const results = `password 1: ${field1.value}\npassword 2: ${field2.value}`;
+        document.querySelector('.print-code').innerHTML = results;
+      });
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      exampleForm = document.querySelector('#testForm');
+      console.log('[Disableautofill.js] DOMContentLoaded');
+      init();
+    });
+
+    document.querySelector('#reload').addEventListener('click', () => {
+      console.log('Reload button clicked.');
+      daf.destroy();
+      init();
+    });
+
+    document.querySelector('#destory').addEventListener('click', () => {
+      console.log('Destory button clicked.');
+      daf.destroy();
+    });
+
+  </script>
+</body>
+</html>

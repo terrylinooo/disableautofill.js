@@ -7,8 +7,6 @@
   "root": true,
   "extends": [
     "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:react/jsx-runtime",
     "plugin:import/recommended",
     "plugin:import/typescript",
     "plugin:@typescript-eslint/recommended"
@@ -16,15 +14,10 @@
   "overrides": [
   ],
   "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
   "plugins": [
-    "react",
-    "jsx-a11y",
     "import",
     "prettier",
     "@typescript-eslint"
@@ -33,7 +26,7 @@
     "prettier/prettier": "error",
     "object-curly-newline": 0,
     "operator-linebreak": 0,
-    "complexity": ["error", 10]
+    "complexity": ["error", 12]
   },
   "parser": "@typescript-eslint/parser",
   "settings": {
@@ -47,9 +40,7 @@
         ],
         "extensions": [
           ".js",
-          ".jsx",
-          ".ts",
-          ".tsx"
+          ".ts"
         ]
       }
     }

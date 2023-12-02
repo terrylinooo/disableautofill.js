@@ -16,3 +16,5 @@ tests
 example
 coverage
 package-lock.json
+Dockerfile
+index.html

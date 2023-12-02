@@ -2,7 +2,7 @@ import Main from './core/main';
 
 declare global {
   interface Window {
-    Disableautofill: typeof Main;
+    Disableautofill: typeof Main | undefined;
   }
 }
 
