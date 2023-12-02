@@ -14,6 +14,12 @@ describe('Main class', () => {
     expect(main.form).not.toBeNull();
   });
 
+  test('should initialize with Form element', () => {
+    const form = document.querySelector('#login-form');
+    const main = new Main(form, {});
+    expect(main.form).not.toBeNull();
+  });
+
   test('should handle invalid form selector', () => {
     const originalConsoleError = console.error;
     console.error = vi.fn();

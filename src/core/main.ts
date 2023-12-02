@@ -12,9 +12,13 @@ export default class Main {
   event: EventAdapter | null;
   state: State;
 
-  constructor(formSelector: string, options: Partial<Config>) {
+  constructor(form: string | HTMLFormElement, options: Partial<Config>) {
+    if (form instanceof HTMLFormElement) {
+      this.form = form;
+    } else {
+      this.form = document.querySelector(form) as HTMLFormElement;
+    }
     this.setting = { ...config, ...options };
-    this.form = document.querySelector(formSelector) as HTMLFormElement;
     this.clonedForm = this.form?.cloneNode(true) as HTMLFormElement;
     this.event = null;
     this.state = new State();

@@ -185,24 +185,34 @@ new Disableautofill('#testForm', {
 
 ## Development
 
-### `npm run dev`
+#### `npm run dev`
 
 Starts a Vite server with hot reload.
 
-### `npm run lint`
+![](https://i.imgur.com/OeZhi6a.png)
+
+This page is the entry point of the development server. You can find it at `http://localhost:9527/`.
+
+#### `npm run lint`
 
 Executes linting by ESLint.
 
-### `npm run test`
+#### `npm run test`
 
 Runs tests by Vitest.
 
-### `npm run coverage`
+#### `npm run coverage`
 
 Runs coverage analysis by Vitest. Once you run this command, you can find the coverage report in the `coverage` directory.
 ```
 http://localhost:9527/coverage/
 ```
+
+You will see the coverage report like this:
+
+![](https://i.imgur.com/4vQxiB0.png)
+
+
 
 ### Using Docker
 
