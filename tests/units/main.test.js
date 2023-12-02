@@ -23,4 +23,25 @@ describe('Main class', () => {
 
     console.error = originalConsoleError;
   });
+
+  test('should properly destroy the instance', () => {
+    const main = new Main('#login-form', {});
+    const eventSpy = vi.spyOn(main.event, 'emit');
+    const eventDestroySpy = vi.spyOn(main.event, 'destroy');
+
+    main.destroy();
+
+    expect(eventSpy).toHaveBeenCalledWith('restorePasswordName');
+    expect(eventDestroySpy).toHaveBeenCalled();
+  });
+
+  test('should reset form when calling #resetForm', () => {
+    const main = new Main('#login-form', {});
+    const originalForm = main.form;
+    const parentNode = main.form.parentNode;
+
+    main.destroy();
+
+    expect(parentNode.querySelector('#login-form')).not.toBe(originalForm);
+  });
 });

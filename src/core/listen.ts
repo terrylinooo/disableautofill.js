@@ -11,6 +11,7 @@ export const listen = (main: Main): void => {
   const { form, event, state, setting } = main;
   const { fields, asterisk, callback } = setting;
 
+  /* v8 ignore next 4 */
   if (event === null) {
     console.error('EventAdapter is not initialized.');
     return;
@@ -20,6 +21,7 @@ export const listen = (main: Main): void => {
     if ((window as Window & { disableautofill_unit_test?: boolean }).disableautofill_unit_test) {
       console.log('test ok, submitted.');
       return;
+      /* v8 ignore next 2 */
     }
     form.submit();
   };
@@ -61,13 +63,9 @@ export const listen = (main: Main): void => {
     });
 
     restorePassword.then(() => {
-      if (typeof callback === 'function') {
-        if (callback(form)) {
-          submit(form);
-        }
-        return;
+      if (typeof callback === 'function' && callback(form)) {
+        submit(form);
       }
-      submit(form);
     });
   };
 

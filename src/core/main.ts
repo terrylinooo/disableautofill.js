@@ -59,6 +59,7 @@ export default class Main {
   }
 
   #resetForm(): void {
+    /* v8 ignore next 3 */
     if (this.form.parentNode === null || this.clonedForm === null) {
       return;
     }

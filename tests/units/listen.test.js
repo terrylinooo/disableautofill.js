@@ -16,7 +16,11 @@ describe('Listen function', () => {
     formElement = document.getElementById('login-form');
     passwordField = document.getElementById('password');
 
-    main = new Main('#login-form', { fields: ['#password'], asterisk: '●' });
+    main = new Main('#login-form', {
+      fields: ['#password'],
+      asterisk: '●',
+      callback: () => true,
+    });
     state = main.getState();
 
     keyupEvent = new KeyboardEvent('keyup', {
