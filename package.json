@@ -1,6 +1,6 @@
 {
   "name": "disableautofill",
-  "version": "4.0.0-rc.6",
+  "version": "4.0.0",
   "description": "The easiest solution for disabling Google Chrome auto-fill, auto-complete functions.",
   "main": "dist/disableautofill.js",
   "module": "dist/disableautofill.es.js",

@@ -7,7 +7,7 @@
 
 The easiest solution for disabling Google Chrome auto-fill, auto-complete functions.
 
-## Concept
+## Concepts
 
 This library does the following steps:
 
@@ -227,18 +227,10 @@ const LoginFormComponent = () => {
 
   useEffect(() => {
     if (formRef.current) {
-      mainInstance = new Disableautofill(
-        formRef.current,
-        {
-          fields: [
-              '.test-pass',
-              '.test-pass2',
-          ],
-          callback: () => {
-            return true;
-          }
-        }
-      );
+      mainInstance = new Disableautofill(formRef.current, {
+        fields: ['.test-pass', '.test-pass2'],
+        callback: () => true
+      });
     }
 
     return () => {

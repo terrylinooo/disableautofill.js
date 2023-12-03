@@ -71,4 +71,22 @@ describe('Listen function', () => {
     expect(mockSubmitHandler).toHaveBeenCalled();
     expect(passwordField.value).toBe('password');
   });
+
+  test('should randomize password field names and replace values with asterisk if callback returns false', () => {
+    main = new Main('#login-form', {
+      fields: ['#password'],
+      asterisk: '●',
+      callback: () => false,
+    });
+    passwordField.value = '12345678';
+    formElement.dispatchEvent(
+      new Event('submit', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    );
+    setTimeout(() => {
+      expect(passwordField.value).toBe('●'.repeat(8));
+    }, 1000);
+  });
 });
