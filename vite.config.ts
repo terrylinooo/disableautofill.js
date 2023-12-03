@@ -18,7 +18,13 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'disableautofill',
-      fileName: (format) => `disableautofill.${format}.js`,
+      formats: ['es', 'umd', 'cjs'],
+      fileName: (format) => {
+        if (format === 'umd') {
+          return 'disableautofill.js';
+        }
+        return `disableautofill.${format}.js`;
+      },
     },
   },
 });

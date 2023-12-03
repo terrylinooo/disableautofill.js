@@ -39,7 +39,7 @@ export const listen = (main: Main): void => {
     }
   };
 
-  const restorePasswordFieldNames = (e: Event) => {
+  const handlePasswordField = (e: Event, action: 'restore' | 'randomize') => {
     fields.forEach((field: string) => {
       const fieldDom = document.querySelector(field) as HTMLInputElement | null;
       if (fieldDom && fieldDom.getAttribute('data-orig-type') === 'password') {
@@ -47,11 +47,19 @@ export const listen = (main: Main): void => {
           fieldDom,
           event: e,
           asterisk,
-          action: 'restore',
+          action: action,
           state,
         });
       }
     });
+  };
+
+  const restorePasswordFieldNames = (e: Event) => {
+    handlePasswordField(e, 'restore');
+  };
+
+  const randomizePasswordFieldNames = (e: Event) => {
+    handlePasswordField(e, 'randomize');
   };
 
   const submitForm = (e: Event) => {
@@ -63,9 +71,12 @@ export const listen = (main: Main): void => {
     });
 
     restorePassword.then(() => {
-      if (typeof callback === 'function' && callback(form)) {
-        submit(form);
+      if (typeof callback === 'function' && callback(form) === false) {
+        randomizePasswordFieldNames(e);
+        return;
       }
+      submit(form);
+      randomizePasswordFieldNames(e);
     });
   };
 

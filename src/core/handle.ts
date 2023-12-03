@@ -51,9 +51,10 @@ export const handle = ({ fieldDom, event, asterisk, action, state }: HandleOptio
   // Randomize the name attribute to prevent autofill by browsers like Chrome
   // The original data will be restored when submitting the form.
   const ran = new Randomizer(el, originalPassChars, state);
-
+  console.log(action);
   if (action === 'randomize') {
     ran.randomize();
+    console.log(el);
   } else if (action === 'restore') {
     ran.restore();
   }

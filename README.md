@@ -1,23 +1,34 @@
 # disableautofill.js
 
-I'm working on version 4.x right now. Fixing some old bugs, switching the code over to TypeScript, and making sure everything's thoroughly tested. Please hold off on using it until the `rc` tag is dropped from the version number.
-
 ![Disable auto-fill, auto-complete functions](https://i.imgur.com/MvWi2Sr.png)
+
 
 ![Test](https://github.com/terrylinooo/disableautofill.js/actions/workflows/testing.yml/badge.svg) [![codecov](https://codecov.io/gh/terrylinooo/disableautofill.js/branch/master/graph/badge.svg?token=lIP1cwSQjC)](https://codecov.io/gh/terrylinooo/disableautofill.js) [![DeepScan grade](https://deepscan.io/api/teams/19398/projects/23075/branches/688836/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=19398&pid=23075&bid=688836)
 
 The easiest solution for disabling Google Chrome auto-fill, auto-complete functions.
 
+## Concept
+
 This library does the following steps:
 
-* Replace `type="password"` with `type="text"`. [1]
-* Replace the text of password with asterisk symbols.
+* Replace `type="password"` with `type="text"`.
+* Replace the text of password with **asterisk** symbols.
 * Add an attribute `autocomplete="off"` on form.
 * Randomize the attribute `name` in order to prevent Google Chrome to remember what you fill.
 
-Note:
+The library will restore the original password value when you submit the form and then replace the password value with asterisk symbols again.
 
-[1] *It is recommended to use `type="text"` directly, or it might not work depends on browser's version and page rendering speed.*
+The flowchart below shows the process of the library:
+
+![](https://i.imgur.com/hAIIt2R.png)
+
+- `Main`: Acts as the entry point of the process, responsible for initializing other components.
+- `EventAdapter`: Manages the addition and removal of DOM events.
+- `listen`: Sets up listeners for specific form events, like keyboard inputs and form submissions.
+- `handle`: Processes DOM elements (like password fields) based on triggered events.
+- `Randomizer`: Performs randomization and restoration operations on form fields to manage password display.
+- `State`: Maintains and updates form state, such as temporary and original password values.
+- DOM Elements: Refers to the HTML elements (like input fields) that are directly manipulated.
 
 ## Install
 
@@ -28,13 +39,34 @@ npm install disableautofill
 
 or download the latest release.
 
-## Options
+## Usage
+
+```javascript
+new Disableautofill(form, options);
+```
+
+- `form` CSS selector or DOM element.
+- `options` The options.
+
+### Options
 
 option | default | type | note 
 ---- | --- | --- | ---
 fields | [] | array | The id or class of the fields (the `input` elements for filling password in the form). For example: `['.newpass', 'newpass2']`
 asterisk | ● | string | Character use to hide the real password value.
 callback | null | function | To validate form fields or something you can do.
+
+### Public Methods
+
+#### `destroy()`
+
+Removes all event listeners and restores the original form element. Please note that all events will be removed after calling this method.
+
+#### `init()`
+
+This method is called by default when you initialize the script. You can call this method to re-initialize the script after calling the `destroy()` method.
+
+
 
 ## Examples
 
@@ -67,7 +99,7 @@ Assume that you have a form like this:
 Include the UMD package's JavaScript file in your HTML document using a `<script>` tag.
 
 ```html
-<script src="./dist/disableautofill.umd.js"></script>
+<script src="./dist/disableautofill.js"></script>
 ```
 
 And then, initialize the script in the next `<script>` section.
@@ -149,7 +181,7 @@ window.addEventListener(
   initializeDisableautofill
 );
 ```
-### In Node.js
+### Node Environment
 
 ```javascript
 import Disableautofill from 'disableautofill';
@@ -184,8 +216,6 @@ new Disableautofill('#testForm', {
 ```
 
 ### Intergate with React
-
-- [CodePen](https://codepen.io/terrylinooo/pen/bGzQBxR)
 
 ```javascript
 import React, { useEffect, useRef } from 'react';
@@ -242,9 +272,9 @@ const LoginFormComponent = () => {
 export default LoginFormComponent;
 ```
 
-### Intergrate with Vue
+This is the simple example of React. You may modify the code to fit your needs. See this example run in [CodePen](https://codepen.io/terrylinooo/pen/bGzQBxR).
 
-- [CodePen](https://codepen.io/terrylinooo/pen/BaMGpEq)
+### Intergrate with Vue
 
 ```javascript
 import { onMounted, onUnmounted, ref, createApp } from 'vue';
@@ -294,6 +324,10 @@ const App = {
 };
 ```
 
+This is the simple example of Vue 3. You may modify the code to fit your needs. See this example run in [CodePen](https://codepen.io/terrylinooo/pen/BaMGpEq).
+
+---
+
 ## Development
 
 #### `npm run dev`
@@ -340,8 +374,8 @@ If Docker is your preferred choice, here's what you need to know.
 
 ## Contributing
 
-- Create a branch from `4.x` and submit a pull request.
-- Please make sure your code passes the tests and linting.
+- Please create a branch off of the 4.x branch and submit your pull requests back to the 4.x branch.
+- Run the commands `npm run test` and `npm run lint` before submitting your pull request. Ensure that all tests pass and there are no linting errors.
 
 ## About
 
