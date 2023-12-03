@@ -6,7 +6,8 @@ import { resolve } from 'path';
 export default defineConfig({
   plugins: [dts()],
   server: {
-    host: '127.0.95.27',
+    host: '0.0.0.0',
+    port: 9527,
   },
   resolve: {
     alias: {
@@ -17,7 +18,13 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'disableautofill',
-      fileName: (format) => `disableautofill.${format}.js`
+      formats: ['es', 'umd', 'cjs'],
+      fileName: (format) => {
+        if (format === 'umd') {
+          return 'disableautofill.js';
+        }
+        return `disableautofill.${format}.js`;
+      },
     },
   },
 });

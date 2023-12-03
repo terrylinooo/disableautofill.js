@@ -1,13 +1,7 @@
 import Randomizer from './randomizer';
 import { HandleOptions } from '../types';
 
-export const handle = ({
-  fieldDom,
-  event,
-  asterisk,
-  action,
-  state,
-}: HandleOptions): void => {
+export const handle = ({ fieldDom, event, asterisk, action, state }: HandleOptions): void => {
   const temporaryPassValue = state.get('temporary_pass_value');
   const temporaryPassLength = state.get('temporary_pass_length');
   const originalPassValue = state.get('original_pass_value');
@@ -31,10 +25,6 @@ export const handle = ({
   // Determine the current position of the keyup character.
   const currKeyupPos = el.selectionStart;
 
-  if (currKeyupPos === null) {
-    return;
-  }
-
   // Replace non-asterisk characters with their original values.
   for (let i = 0; i < temporaryPassChars.length; i += 1) {
     if (temporaryPassChars[i] !== asterisk) {
@@ -48,7 +38,7 @@ export const handle = ({
 
     if (event.code === 'Backspace' || event.code === 'Delete') {
       originalPassChars.splice(currKeyupPos, diff);
-    } else {
+    } else if (currKeyupPos !== null) {
       // User highlighted and overwrote a portion of the password.
       originalPassChars.splice(currKeyupPos - 1, diff + 1);
       originalPassChars.splice(currKeyupPos - 1, 0, temporaryPassChars[currKeyupPos - 1]);
@@ -72,4 +62,3 @@ export const handle = ({
   state.update('temporary_pass_length', temporaryPassLength);
   state.update('original_pass_value', originalPassValue);
 };
-

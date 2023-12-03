@@ -59,4 +59,3 @@ export default class Randomizer {
     this.dom.value = this.originalPassChars.join('');
   }
 }
-

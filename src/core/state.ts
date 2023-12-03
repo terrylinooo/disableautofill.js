@@ -14,6 +14,7 @@ export default class State {
     return this.state[this.id][type] || {};
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   update(type: string, data: any): void {
     this.state[this.id][type] = data;
   }

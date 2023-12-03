@@ -17,6 +17,15 @@ jobs:
         node-version: '16.x'
         registry-url: 'https://registry.npmjs.org'
 
+    - name: Compare version in package.json with Git tag
+      run: |
+        PACKAGE_VERSION=$(node -p "require('./package.json').version")
+        TAG_VERSION=${{ github.event.release.tag_name }}
+        if [ "$PACKAGE_VERSION" != "$TAG_VERSION" ]; then
+          echo "Version in package.json ($PACKAGE_VERSION) does not match the Git tag ($TAG_VERSION)"
+          exit 1
+        fi
+
     - name: Install dependencies in CI flow
       run: npm ci
 
@@ -32,12 +41,13 @@ jobs:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
     - name: Archive production artifacts
-      run: zip -r dist.zip dist/
+      run:
+        zip -r disableautofill-${{ github.event.release.tag_name }}.zip dist/
         
     - name: Upload dist to Release
       uses: softprops/action-gh-release@v1
       with:
-        files: dist.zip
+        files: disableautofill-${{ github.event.release.tag_name }}.zip
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

@@ -1,6 +1,7 @@
 import Randomizer from '../../src/core/randomizer';
 import State from '../../src/core/state';
 import loginForm from '../fixtures/login-form';
+import { describe, test, expect, beforeEach } from 'vitest';
 
 describe('Randomizer class', () => {
   let passwordField;

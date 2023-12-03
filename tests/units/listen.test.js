@@ -16,7 +16,11 @@ describe('Listen function', () => {
     formElement = document.getElementById('login-form');
     passwordField = document.getElementById('password');
 
-    main = new Main('#login-form', { fields: ['#password'], asterisk: '●' });
+    main = new Main('#login-form', {
+      fields: ['#password'],
+      asterisk: '●',
+      callback: () => true,
+    });
     state = main.getState();
 
     keyupEvent = new KeyboardEvent('keyup', {
@@ -57,12 +61,32 @@ describe('Listen function', () => {
     passwordField.value = 'password';
     passwordField.dispatchEvent(keyupEvent);
 
-    formElement.dispatchEvent(new Event('submit', {
-      bubbles: true,
-      cancelable: true,
-    }));
+    formElement.dispatchEvent(
+      new Event('submit', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    );
 
     expect(mockSubmitHandler).toHaveBeenCalled();
     expect(passwordField.value).toBe('password');
+  });
+
+  test('should randomize password field names and replace values with asterisk if callback returns false', () => {
+    main = new Main('#login-form', {
+      fields: ['#password'],
+      asterisk: '●',
+      callback: () => false,
+    });
+    passwordField.value = '12345678';
+    formElement.dispatchEvent(
+      new Event('submit', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    );
+    setTimeout(() => {
+      expect(passwordField.value).toBe('●'.repeat(8));
+    }, 1000);
   });
 });

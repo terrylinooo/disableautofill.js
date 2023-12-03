@@ -11,65 +11,76 @@ export const listen = (main: Main): void => {
   const { form, event, state, setting } = main;
   const { fields, asterisk, callback } = setting;
 
+  /* v8 ignore next 4 */
+  if (event === null) {
+    console.error('EventAdapter is not initialized.');
+    return;
+  }
+
   const submit = (form: HTMLFormElement): void => {
-    if ((window as any).disableautofill_unit_test) {
+    if ((window as Window & { disableautofill_unit_test?: boolean }).disableautofill_unit_test) {
       console.log('test ok, submitted.');
       return;
+      /* v8 ignore next 2 */
     }
     form.submit();
   };
 
-  if (event === null) {
-    console.error('EventAdapter is not initialized.')
-    return;
-  }
+  const keyupPasswordField = (e: Event | KeyboardEvent) => {
+    const fieldDom = e.target as HTMLInputElement | null;
+    if (fieldDom && fieldDom.getAttribute('data-orig-type') === 'password') {
+      handle({
+        fieldDom,
+        event: e,
+        asterisk,
+        action: 'randomize',
+        state,
+      });
+    }
+  };
 
-  event.on('keyup', (e: Event | KeyboardEvent) => {
-    fields.forEach((field: any) => {
+  const handlePasswordField = (e: Event, action: 'restore' | 'randomize') => {
+    fields.forEach((field: string) => {
       const fieldDom = document.querySelector(field) as HTMLInputElement | null;
-      if (fieldDom) {
+      if (fieldDom && fieldDom.getAttribute('data-orig-type') === 'password') {
         handle({
           fieldDom,
           event: e,
           asterisk,
-          action: 'randomize',
+          action: action,
           state,
         });
-        fieldDom.setAttribute('type', 'text');
       }
     });
-  });
+  };
 
-  event.on('submit', (e: Event) => {
+  const restorePasswordFieldNames = (e: Event) => {
+    handlePasswordField(e, 'restore');
+  };
+
+  const randomizePasswordFieldNames = (e: Event) => {
+    handlePasswordField(e, 'randomize');
+  };
+
+  const submitForm = (e: Event) => {
     e.preventDefault();
 
     const restorePassword = new Promise<void>((resolve) => {
-      for (let i = 0; i < fields.length; i += 1) {
-        const fieldDom = document.querySelector(fields[i]) as HTMLInputElement | null;
-        if (fieldDom) {
-          handle({
-            fieldDom,
-            event: e,
-            asterisk,
-            action: 'restore',
-            state,
-          });
-          if (fieldDom.getAttribute('data-original-type') === 'password') {
-            fieldDom.setAttribute('type', 'password');
-          }
-        }
-      }
+      restorePasswordFieldNames(e);
       resolve();
     });
 
     restorePassword.then(() => {
-      if (typeof callback === 'function') {
-        if (callback(form)) {
-          submit(form);
-        }
+      if (typeof callback === 'function' && callback(form) === false) {
+        randomizePasswordFieldNames(e);
         return;
       }
       submit(form);
+      randomizePasswordFieldNames(e);
     });
-  });
+  };
+
+  event.on('keyup', keyupPasswordField);
+  event.on('submit', submitForm);
+  event.on('restorePasswordName', restorePasswordFieldNames);
 };

@@ -48,7 +48,7 @@ export default class EventAdapter {
    * Destroys all event listeners associated with the target element.
    */
   destroy(): void {
-    Object.keys(this.events).forEach(event => {
+    Object.keys(this.events).forEach((event) => {
       this.off(event);
     });
     this.events = {};
