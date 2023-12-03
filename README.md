@@ -183,6 +183,117 @@ new Disableautofill('#testForm', {
 });
 ```
 
+### Intergate with React
+
+- [CodePen](https://codepen.io/terrylinooo/pen/bGzQBxR)
+
+```javascript
+import React, { useEffect, useRef } from 'react';
+import Disableautofill from 'disableautofill';
+
+const LoginFormComponent = () => {
+  const formRef = useRef(null);
+  let mainInstance = null;
+
+  useEffect(() => {
+    if (formRef.current) {
+      mainInstance = new Disableautofill(
+        formRef.current,
+        {
+          fields: [
+              '.test-pass',
+              '.test-pass2',
+          ],
+          callback: () => {
+            return true;
+          }
+        }
+      );
+    }
+
+    return () => {
+      if (mainInstance) {
+        mainInstance.destroy();
+      }
+    };
+  }, []);
+
+  return (
+    <form ref={formRef}>
+      <div class="input-group">
+        <label>Username</label>
+        <input type="text" name="username" />
+      </div>
+      <div class="input-group">
+        <label>Password</label>
+        <input type="password" name="password" class="test-pass" />
+      </div>
+      <div class="input-group">
+        <label>Confirm password</label>
+        <input type="password" name="confirm_password" class="test-pass2" />
+      </div>
+      <div class="button-section">
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  );
+};
+
+export default LoginFormComponent;
+```
+
+### Intergrate with Vue
+
+- [CodePen](https://codepen.io/terrylinooo/pen/BaMGpEq)
+
+```javascript
+import { onMounted, onUnmounted, ref, createApp } from 'vue';
+import Disableautofill from 'disableautofill';
+
+const App = {
+  setup() {
+    const formRef = ref(null);
+    let mainInstance = null;
+
+    onMounted(() => {
+      if (formRef.value) {
+        mainInstance = new Disableautofill(formRef.value, {
+          fields: ['.test-pass', '.test-pass2'],
+          callback: () => true
+        });
+      }
+    });
+
+    onUnmounted(() => {
+      if (mainInstance) {
+        mainInstance.destroy();
+      }
+    });
+
+    return { formRef };
+  },
+  template: `
+    <form ref="formRef">
+      <div class="input-group">
+        <label for="username">Username</label>
+        <input id="username" type="text" name="username" />
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input id="password" type="password" name="password" class="test-pass" />
+      </div>
+      <div class="input-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input id="confirmPassword" type="password" name="confirm_password" class="test-pass2" />
+      </div>
+      <div class="button-section">
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  `
+};
+```
+
 ## Development
 
 #### `npm run dev`
@@ -211,8 +322,6 @@ http://localhost:9527/coverage/
 You will see the coverage report like this:
 
 ![](https://i.imgur.com/4vQxiB0.png)
-
-
 
 ### Using Docker
 

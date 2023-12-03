@@ -9,3 +9,5 @@ declare global {
 if (typeof window !== 'undefined') {
   window.Disableautofill = Main;
 }
+
+export default Main;
